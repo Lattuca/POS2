@@ -1,8 +1,8 @@
 <?php
 
 // include function files for this application
-require_once('book_sc_fns.php');
-session_start();
+require_once('POS_fns.php');
+#session_start();
 
 if (($_POST['username']) && ($_POST['passwd'])) {
 	// they have just tried logging in
@@ -19,7 +19,7 @@ if (($_POST['username']) && ($_POST['passwd'])) {
       do_html_header("Problem:");
       echo "<p>You could not be logged in.<br/>
             You must be logged in to view this page.</p>";
-      do_html_url('login.php', 'Login');
+      do_html_url('POS_login.php', 'Login');
       do_html_footer();
       exit;
     }

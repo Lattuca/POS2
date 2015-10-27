@@ -1,9 +1,9 @@
 <?php
 
-  include ('book_sc_fns.php');
+  include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
-header("Cache-Control: max-age=300, must-revalidate");
+  header("Cache-Control: max-age=300, must-revalidate");
   do_html_header("Checkout");
 
   // create short variable names
@@ -13,9 +13,11 @@ header("Cache-Control: max-age=300, must-revalidate");
   $zip = $_POST['zip'];
   $country = $_POST['country'];
 
+
   // if filled out
   if (($_SESSION['cart']) && ($name) && ($address) && ($city) && ($zip) && ($country)) {
     // able to insert into database
+          #echo "Purchase....... CART";
     if(insert_order($_POST) != false ) {
       //display cart, not allowing changes and without pictures
       display_cart($_SESSION['cart'], false, 0);

@@ -2,7 +2,8 @@
 
 function do_html_header($title = '') {
   // print an HTML header
- 
+  #session_start();
+  echo " before session varaibles.......................";
   // declare the session variables we want access to inside the function
   if (!$_SESSION['items']) {
     $_SESSION['items'] = '0';
@@ -26,7 +27,7 @@ function do_html_header($title = '') {
   <table width="100%" border="0" cellspacing="0" bgcolor="#cccccc">
   <tr>
   <td rowspan="2">
-  <a href="index.php"><img src="images/Carmelos-POS.gif" alt="Bookorama" border="0"
+  <a href="index.php"><img src="images/Carmelos-POS.gif" alt="CarmeloPos" border="0"
        align="left" valign="bottom" height="55" width="325"/></a>
   </td>
   <td align="right" valign="bottom">
@@ -104,27 +105,27 @@ function display_categories($cat_array) {
   echo "<hr />";
 }
 
-function display_books($book_array) {
-  //display all books in the array passed in
-  if (!is_array($book_array)) {
-    echo "<p>No books currently available in this category</p>";
+function display_products($product_array) {
+  //display all products in the array passed in
+  if (!is_array($product_array)) {
+    echo "<p>No products currently available in this category</p>";
   } else {
     //create table
     echo "<table width=\"100%\" border=\"0\">";
 
-    //create a table row for each book
-    foreach ($book_array as $row) {
-      $url = "show_book.php?isbn=".$row['isbn'];
+    //create a table row for each product
+    foreach ($product_array as $row) {
+      $url = "show_product.php?product_upc=".$row['product_upc'];
       echo "<tr><td>";
-      if (@file_exists("images/".$row['isbn'].".jpg")) {
-        $title = "<img src=\"images/".$row['isbn'].".jpg\"
+      if (@file_exists("images/".$row['product_upc'].".jpg")) {
+        $title = "<img src=\"images/".$row['product_upc'].".jpg\"
                   style=\"border: 1px solid black\"/>";
         do_html_url($url, $title);
       } else {
         echo "&nbsp;";
       }
       echo "</td><td>";
-      $title = $row['title']." by ".$row['author'];
+      $title = $row['product_upc']." by ".$row['product_desc'];
       do_html_url($url, $title);
       echo "</td></tr>";
     }
@@ -135,30 +136,30 @@ function display_books($book_array) {
   echo "<hr />";
 }
 
-function display_book_details($book) {
-  // display all details about this book
-  if (is_array($book)) {
+function display_product_details($product) {
+  // display all details about this product
+  if (is_array($product)) {
     echo "<table><tr>";
     //display the picture if there is one
-    if (@file_exists("images/".$book['isbn'].".jpg"))  {
-      $size = GetImageSize("images/".$book['isbn'].".jpg");
+    if (@file_exists("images/".$product['product_upc'].".jpg"))  {
+      $size = GetImageSize("images/".$product['product_upc'].".jpg");
       if(($size[0] > 0) && ($size[1] > 0)) {
-        echo "<td><img src=\"images/".$book['isbn'].".jpg\"
+        echo "<td><img src=\"images/".$product['product_upc'].".jpg\"
               style=\"border: 1px solid black\"/></td>";
       }
     }
     echo "<td><ul>";
-    echo "<li><strong>Author:</strong> ";
-    echo $book['author'];
-    echo "</li><li><strong>ISBN:</strong> ";
-    echo $book['isbn'];
+    echo "<li><strong>Product Description:</strong> ";
+    echo $product['product_desc'];
+    echo "</li><li><strong>product_upc:</strong> ";
+    echo $product['product_upc'];
     echo "</li><li><strong>Our Price:</strong> ";
-    echo number_format($book['price'], 2);
-    echo "</li><li><strong>Description:</strong> ";
-    echo $book['description'];
+    echo number_format($product['price'], 2);
+    echo "</li><li><strong>Product Notes:</strong> ";
+    echo $product['product_notes'];
     echo "</li></ul></td></tr></table>";
   } else {
-    echo "<p>The details of this book cannot be displayed at this time.</p>";
+    echo "<p>The details of this product cannot be displayed at this time.</p>";
   }
   echo "<hr />";
 }
@@ -183,18 +184,18 @@ function display_checkout_form() {
     <td><input type="text" name="city" value="" maxlength="20" size="40"/></td>
   </tr>
   <tr>
-    <td>State/Province</td>
+    <td>State</td>
     <td><input type="text" name="state" value="" maxlength="20" size="40"/></td>
   </tr>
   <tr>
-    <td>Postal Code or Zip Code</td>
+    <td>Zip Code</td>
     <td><input type="text" name="zip" value="" maxlength="10" size="40"/></td>
   </tr>
   <tr>
     <td>Country</td>
     <td><input type="text" name="country" value="" maxlength="20" size="40"/></td>
   </tr>
-  <tr><th colspan="2" bgcolor="#cccccc">Shipping Address (leave blank if as above)</th></tr>
+  <!-- <tr><th colspan="2" bgcolor="#cccccc">Shipping Address (leave blank if as above)</th></tr>
   <tr>
     <td>Name</td>
     <td><input type="text" name="ship_name" value="" maxlength="40" size="40"/></td>
@@ -219,7 +220,7 @@ function display_checkout_form() {
     <td>Country</td>
     <td><input type="text" name="ship_country" value="" maxlength="20" size="40"/></td>
   </tr>
-  <tr>
+  <tr> -->
     <td colspan="2" align="center"><p><strong>Please press Purchase to confirm
          your purchase, or Continue Shopping to add or remove items.</strong></p>
      <?php display_form_button("purchase", "Purchase These Items"); ?>
@@ -321,15 +322,15 @@ function display_cart($cart, $change = true, $images = 1) {
          </tr>";
 
   //display each item as a table row
-  foreach ($cart as $isbn => $qty)  {
-    $book = get_book_details($isbn);
+  foreach ($cart as $product_upc => $qty)  {
+    $product = get_product_details($product_upc);
     echo "<tr>";
     if($images == true) {
       echo "<td align=\"left\">";
-      if (file_exists("images/".$isbn.".jpg")) {
-         $size = GetImageSize("images/".$isbn.".jpg");
+      if (file_exists("images/".$product_upc.".jpg")) {
+         $size = GetImageSize("images/".$product_upc.".jpg");
          if(($size[0] > 0) && ($size[1] > 0)) {
-           echo "<img src=\"images/".$isbn.".jpg\"
+           echo "<img src=\"images/".$product_upc.".jpg\"
                   style=\"border: 1px solid black\"
                   width=\"".($size[0]/3)."\"
                   height=\"".($size[1]/3)."\"/>";
@@ -340,18 +341,18 @@ function display_cart($cart, $change = true, $images = 1) {
       echo "</td>";
     }
     echo "<td align=\"left\">
-          <a href=\"show_book.php?isbn=".$isbn."\">".$book['title']."</a>
-          by ".$book['author']."</td>
-          <td align=\"center\">\$".number_format($book['price'], 2)."</td>
+          <a href=\"show_product.php?product_upc=".$product_upc."\">".$product['product_desc']."</a>
+          by ".$product['product_desc']."</td>
+          <td align=\"center\">\$".number_format($product['price'], 2)."</td>
           <td align=\"center\">";
 
     // if we allow changes, quantities are in text boxes
     if ($change == true) {
-      echo "<input type=\"text\" name=\"".$isbn."\" value=\"".$qty."\" size=\"3\">";
+      echo "<input type=\"text\" name=\"".$product_upc."\" value=\"".$qty."\" size=\"3\">";
     } else {
       echo $qty;
     }
-    echo "</td><td align=\"center\">\$".number_format($book['price']*$qty,2)."</td></tr>\n";
+    echo "</td><td align=\"center\">\$".number_format($product['price']*$qty,2)."</td></tr>\n";
   }
   // display total row
   echo "<tr>
@@ -401,7 +402,7 @@ function display_admin_menu() {
 <br />
 <a href="index.php">Go to main site</a><br />
 <a href="insert_category_form.php">Add a new category</a><br />
-<a href="insert_book_form.php">Add a new book</a><br />
+<a href="insert_product_form.php">Add a new product</a><br />
 <a href="change_password_form.php">Change admin password</a><br />
 <?php
 }

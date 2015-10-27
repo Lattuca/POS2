@@ -1,5 +1,5 @@
 <?php
-  include ('book_sc_fns.php');
+  include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
   header("Cache-Control: max-age=300, must-revalidate");

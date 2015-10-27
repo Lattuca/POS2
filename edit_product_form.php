@@ -1,15 +1,15 @@
 <?php
 
 // include function files for this application
-require_once('book_sc_fns.php');
+require_once('POS_fns.php');
 session_start();
 
-do_html_header("Edit book details");
+do_html_header("Edit product details");
 if (check_admin_user()) {
-  if ($book = get_book_details($_GET['isbn'])) {
-    display_book_form($book);
+  if ($product = get_product_details($_GET['product_upc'])) {
+    display_product_form($product_upc);
   } else {
-    echo "<p>Could not retrieve book details.</p>";
+    echo "<p>Could not retrieve product details.</p>";
   }
   do_html_url("admin.php", "Back to administration menu");
 } else {

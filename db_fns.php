@@ -1,11 +1,11 @@
 <?php
 
-define("DB_PATH","mysql:host=localhost;dbname=book_sc");
+define("DB_PATH","mysql:host=localhost;dbname=POS2");
 define("DB_LOGIN","carmelo");
 define("DB_PW","cl201812");
 
 function db_connect() {
-   $result = new mysqli('localhost', DB_LOGIN, DB_PW, 'book_sc');
+   $result = new mysqli('localhost', DB_LOGIN, DB_PW, 'POS2');
    #$result = new PDO(DB_PATH, DB_LOGIN, DB_PW);
    if (!$result) {
       return false;

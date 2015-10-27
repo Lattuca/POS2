@@ -1,5 +1,5 @@
 <?php
-  include ('book_sc_fns.php');
+  include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
 
@@ -24,11 +24,11 @@
   }
 
   if(isset($_POST['save'])) {
-    foreach ($_SESSION['cart'] as $isbn => $qty) {
-      if($_POST[$isbn] == '0') {
-        unset($_SESSION['cart'][$isbn]);
+    foreach ($_SESSION['cart'] as $product_upc => $qty) {
+      if($_POST[$product_upc] == '0') {
+        unset($_SESSION['cart'][$product_upc]);
       } else {
-        $_SESSION['cart'][$isbn] = $_POST[$isbn];
+        $_SESSION['cart'][$product_upc] = $_POST[$product_upc];
       }
     }
 
@@ -48,7 +48,7 @@
 
   // if we have just added an item to the cart, continue shopping in that category
   if($new)   {
-    $details =  get_book_details($new);
+    $details =  get_product_details($new);
     if($details['catid']) {
       $target = "show_cat.php?catid=".$details['catid'];
     }

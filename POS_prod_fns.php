@@ -41,33 +41,36 @@ function get_category_name($catid) {
 }
 
 
-function get_books($catid) {
-   // query database for the books in a category
+function get_products($catid) {
+   // query database for the products in a category
    if ((!$catid) || ($catid == '')) {
      return false;
    }
 
    $conn = db_connect();
-   $query = "select * from books where catid = '".$catid."'";
+   $query = "select * from products where catid = '".$catid."'";
    $result = @$conn->query($query);
    if (!$result) {
      return false;
    }
-   $num_books = @$result->num_rows;
-   if ($num_books == 0) {
+
+   $num_products = @$result->num_rows;
+
+   if ($num_products == 0) {
       return false;
    }
+
    $result = db_result_to_array($result);
    return $result;
 }
 
-function get_book_details($isbn) {
-  // query database for all details for a particular book
-  if ((!$isbn) || ($isbn=='')) {
+function get_product_details($product_upc) {
+  // query database for all details for a particular product
+  if ((!$product_upc) || ($product_upc=='')) {
      return false;
   }
   $conn = db_connect();
-  $query = "select * from books where isbn='".$isbn."'";
+  $query = "select * from products where product_upc='".$product_upc."'";
   $result = @$conn->query($query);
   if (!$result) {
      return false;
@@ -81,8 +84,8 @@ function calculate_price($cart) {
   $price = 0.0;
   if(is_array($cart)) {
     $conn = db_connect();
-    foreach($cart as $isbn => $qty) {
-      $query = "select price from books where isbn='".$isbn."'";
+    foreach($cart as $product_upc => $qty) {
+      $query = "select price from products where product_upc='".$product_upc."'";
       $result = $conn->query($query);
       if ($result) {
         $item = $result->fetch_object();
@@ -98,7 +101,7 @@ function calculate_items($cart) {
   // sum total items in shopping cart
   $items = 0;
   if(is_array($cart))   {
-    foreach($cart as $isbn => $qty) {
+    foreach($cart as $product_upc => $qty) {
       $items += $qty;
     }
   }
