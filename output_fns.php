@@ -3,7 +3,7 @@
 function do_html_header($title = '') {
   // print an HTML header
   #session_start();
-  echo " before session varaibles.......................";
+  #echo " before session varaibles.......................";
   // declare the session variables we want access to inside the function
   if (!$_SESSION['items']) {
     $_SESSION['items'] = '0';
@@ -381,22 +381,63 @@ function display_cart($cart, $change = true, $images = 1) {
 function display_login_form() {
   // dispaly form asking for name and password
 ?>
+<!-- <p><a href="register_form.php">Not a member?</a></p> -->
+<p><a href="register_form.php">Not a member?</a></p>
+ <!-- <form method="post" action="member.php"> -->
+ <!-- <form method="post" action="index.php"> -->
  <form method="post" action="admin.php">
  <table bgcolor="#cccccc">
-   <tr>
-     <td>Username:</td>
-     <td><input type="text" name="username"/></td></tr>
-   <tr>
-     <td>Password:</td>
-     <td><input type="password" name="passwd"/></td></tr>
-   <tr>
-     <td colspan="2" align="center">
-     <input type="submit" value="Log in"/></td></tr>
-   <tr>
- </table></form>
+  <tr>
+    <td colspan="2">Members log in here:</td>
+  <tr>
+    <td>Username:</td>
+    <td><input type="text" name="username"/></td></tr>
+  <tr>
+    <td>Password:</td>
+    <td><input type="password" name="passwd"/></td></tr>
+  <tr>
+    <td colspan="2" align="center">
+    <input type="submit" value="Log in"/></td></tr>
+  <tr>
+    <td colspan="2"><a href="forgot_form.php">Forgot your password?</a></td>
+  </tr>
+</table></form>
 <?php
 }
 
+function display_registration_form() {
+?>
+ <form method="post" action="register_new.php">
+ <table bgcolor="#cccccc">
+   <tr>
+     <td>Email address:</td>
+     <td><input type="text" name="email" size="30"/></td></tr>
+   <tr>
+     <td>Preferred username <br />(max 16 chars):</td>
+     <td valign="top"><input type="text" name="username"
+         size="16" maxlength="16"/</td></tr>
+   <tr>
+     <tr>
+       <td>First name:</td>
+       <td valign="top"><input type="text" name="first"></td></tr>
+     <tr>
+    <tr>
+        <td>Last name:</td>
+        <td valign="top"><input type="text" name="last" ></td></tr>
+    <tr>
+     <td>Password <br />(between 6 and 16 chars):</td>
+     <td valign="top"><input type="password" name="passwd"
+         size="16" maxlength="16"/></td></tr>
+   <tr>
+     <td>Confirm password:</td>
+     <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
+   <tr>
+     <td colspan=2 align="center">
+     <input type="submit" value="Register"></td></tr>
+ </table></form>
+<?php
+
+}
 function display_admin_menu() {
 ?>
 <br />
@@ -429,3 +470,29 @@ function try_again($str) {
 exit;
 }
 ?>
+
+<?php
+function display_user_menu() {
+  // display the menu options on this page
+?>
+<hr />
+<!-- <a href="member.php">Home</a> &nbsp;|&nbsp;
+<a href="add_bm_form.php">Add BM</a> &nbsp;|&nbsp; -->
+<?php
+  /*
+  // only offer the delete option if bookmark table is on this page
+   global $bm_table;
+  if ($bm_table == true) {
+    echo "<a href=\"#\" onClick=\"bm_table.submit();\">Delete BM</a> &nbsp;|&nbsp;";
+  } else {
+    echo "<span style=\"color: #cccccc\">Delete BM</span> &nbsp;|&nbsp;";
+  }*/
+?>
+<a href="change_passwd_form.php">Change password</a>
+<br />
+<!-- <a href="recommend.php">Recommend URLs to me</a> &nbsp;|&nbsp; -->
+<a href="logout.php">Logout</a>
+<hr />
+<?
+<?php
+}

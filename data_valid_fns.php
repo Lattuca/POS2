@@ -19,4 +19,15 @@ function valid_email($address) {
   }
 }
 
+function is_empty_field($str){
+  // chech that there is data in the field
+  $str_temp = trim($str);
+  if ( empty($str_temp))
+    { return true;
+    } else{
+      return false;
+    }
+
+}
+
 ?>
