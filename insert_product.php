@@ -11,14 +11,17 @@ if (check_admin_user()) {
     $product_desc = $_POST['product_desc'];
     $quantity = $_POST['quantity'];
     $price = $_POST['price'];
-    $cost = $_POST['cost']
+    $cost = $_POST['cost'];
     $catid = $_POST['catid'];
     $available = $_POST['available'];
     $product_notes = $_POST['product_notes'];
+    echo "product notes $product_notes";
 
 
-    if(insert_product($product_upc, $product_desc, $quantity, $price, $cost,$catid, $availble, $product_notes)) {
-      echo "<p>product <em>".stripslashes($prduct_upc)."</em> was added to the database.</p>";
+
+
+    if(insert_product($product_upc, $product_desc, $quantity, $price, $cost, $catid, $available, $product_notes)) {
+      echo "<p>product <em>".stripslashes($product_upc)."</em> was added to the database.</p>";
     } else {
       echo "<p>product <em>".stripslashes($product_upc)."</em> could not be added to the database.</p>";
     }

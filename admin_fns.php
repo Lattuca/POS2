@@ -63,17 +63,17 @@ function display_product_form($product = '') {
 
   // if passed an existing product, proceed in "edit mode"
   $edit = is_array($product);
-
+  echo "display product Form..edit is..$edit";
   // most of the form is in plain HTML with some
   // optional PHP bits throughout
   /*
-  product_upc 
+  product_upc
    product_desc
-   quantity 
-   price 
-   cost 
-   catid 
-   available 
+   quantity
+   price
+   cost
+   catid
+   available
    product_notes  */
 ?>
   <form method="post"
@@ -125,13 +125,15 @@ function display_product_form($product = '') {
    <tr>
     <td>Available:</td>
     <td><input type="text" name="available"
-               value="<?php echo $edit ? $product['available'] : ''; ?>" /></td>
+               value="<?php echo $edit ? $product['available'] : '1'; ?>" /></td>
    </tr>
    <tr>
      <td>Notes:</td>
-     <td><textarea rows="3" cols="50"
-          name="description"><?php echo $edit ? $product['product_notes'] : ''; ?></textarea></td>
+        <td><textarea rows="3" cols="50"
+           name="product_notes"><?php echo $edit ? $product['product_notes'] : ''; ?></textarea>
+       </td>
     </tr>
+
     <tr>
       <td <?php if (!$edit) { echo "colspan=2"; }?> align="center">
          <?php
@@ -198,9 +200,11 @@ function insert_category($catname) {
    }
 
    // insert new category
-   $query = "insert into categories values
-            ('', '".$catname."')";
+   $query = "insert into categories (catname)
+             values
+            ('".$catname."')";
    $result = $conn->query($query);
+
    if (!$result) {
      return false;
    } else {
@@ -208,7 +212,7 @@ function insert_category($catname) {
    }
 }
 
-function insert_product($product_upc, $product_desc, $quantity, $price, $cost, $catid, $availble, $product_notes) {
+function insert_product($product_upc, $product_desc, $quantity, $price, $cost, $catid, $available, $product_notes) {
 // insert a new product into the database
 //
 
@@ -225,9 +229,10 @@ function insert_product($product_upc, $product_desc, $quantity, $price, $cost, $
    }
 
    // insert new product
-   $query = "insert into products values
+   $query = "insert into products (product_upc, product_desc, quantity, price, cost, catid, available, product_notes)
+             values
             ('".$product_upc."', '".$product_desc."', '".$quantity."',
-              '".$price."', '".$cost."', 
+              '".$price."', '".$cost."',
              '".$catid."', '".$available."', '".$product_notes."')";
 
    $result = $conn->query($query);
@@ -254,20 +259,20 @@ function update_category($catid, $catname) {
    }
 }
 
-function update_product($oldproduct_upc, $product_upc, $product_desc, 
+function update_product($oldproduct_upc, $product_upc, $product_desc,
                          $quantity, $price, $cost, $catid, $availble, $product_notes) {
 // change details of product stored under $oldproduct_upc in
 // the database to new details in arguments
 
    $conn = db_connect();
 /*
-  product_upc 
+  product_upc
    product_desc
-   quantity 
-   price 
-   cost 
-   catid 
-   available 
+   quantity
+   price
+   cost
+   catid
+   available
    product_notes  */
    $query = "update products
              set product_upc= '".$product_upc."',

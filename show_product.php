@@ -21,11 +21,11 @@
     display_button("edit_product_form.php?product_upc=".$product_upc, "edit-item", "Edit Item");
     display_button("admin.php", "admin-menu", "Admin Menu");
     display_button($target, "continue", "Continue");
-  } else {
-    display_button("show_cart.php?new=".$product_upc, "add-to-cart",
-                   "Add".$product['product_desc']." To My Shopping Cart");
-    display_button($target, "continue-shopping", "Continue Shopping");
   }
+  display_button("show_cart.php?new=".$product_upc, "add-to-cart",
+                   "Add".$product['product_desc']." To My Shopping Cart");
+  display_button($target, "continue-shopping", "Continue Shopping");
+
 
   do_html_footer();
 ?>
