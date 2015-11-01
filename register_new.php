@@ -65,7 +65,7 @@
     // provide link to members page
     do_html_header('Registration successful');
     echo "Your registration was successful.  Go to the members page! <br>";
-    do_html_url('member.php', 'Go to members page');
+    #do_html_url('member.php', 'Go to Members Home Page');
 
    // end page
    do_html_footer();

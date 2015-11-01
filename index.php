@@ -15,8 +15,9 @@
   display_categories($cat_array);
 
   // if logged in as admin, show add, delete, edit cat links
-  if(isset($_SESSION['admin_user'])) {
-    display_button("admin.php", "admin-menu", "Admin Menu");
-  }
+  /*if(isset($_SESSION['admin_user'])) {
+  display_button("admin.php", "admin-menu", "Admin Menu");
+}*/
+  display_button("admin.php", "admin-menu", "Admin Menu");
   do_html_footer();
 ?>

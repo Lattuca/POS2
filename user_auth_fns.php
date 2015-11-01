@@ -43,11 +43,11 @@ function register($username, $password, $first, $last, $email) {
   // check if username is unique
   $result = $conn->query("select * from user where username='".$username."'");
   if (!$result) {
-    throw new Exception('Could not execute query');
+    try_again('Could not execute query');
   }
 
   if ($result->num_rows>0) {
-    throw new Exception('That username is taken - go back and choose another one.');
+    try_again('That username is taken - go back and choose another one.');
   }
 
     // if ok, put in db
@@ -55,9 +55,47 @@ function register($username, $password, $first, $last, $email) {
             values
             ('".$username."', sha1('".$password."'), '".$first."','".$last."','".$email."');";
   $result = $conn->query($query);
- 
+
   if (!$result) {
     throw new Exception('Could not register you in database - please try again later.');
+  }
+
+  return true;
+}
+
+function user_update($username, $password, $first, $last, $email) {
+// register new person with db
+// return true or error message
+
+  // connect to db
+  $conn = db_connect();
+
+  // check if username is unique
+  $result = $conn->query("select * from user where username='".$username."'");
+  if (!$result) {
+    throw new Exception('Could not execute query');
+  }
+
+      // if ok, updatein db
+      /* $query = "update categories
+                set catname='".$catname."'
+                where catid='".$catid."'";
+      $result = @$conn->query($query); */
+
+
+
+  $query = "update user
+                SET passwd = sha1('".$password."'),
+                    first = '".$first."',
+                    last = '".$last."',
+                    email ='".$email."'
+                    where username = '".$username."'";
+
+
+  $result = $conn->query($query);
+
+  if (!$result) {
+    throw new Exception('Could not update you in database - please try again later.');
   }
 
   return true;

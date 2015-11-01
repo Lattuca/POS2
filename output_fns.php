@@ -60,7 +60,7 @@ function do_html_header($title = '') {
   </td>
   </tr>
   </table>
-<?php
+  <?php
   if($title) {
     do_html_heading($title);
   }
@@ -419,11 +419,11 @@ function display_registration_form() {
    <tr>
      <tr>
        <td>First name:</td>
-       <td valign="top"><input type="text" name="first"></td></tr>
+       <td valign="top"><input type="text" name="first" size="25"></td></tr>
      <tr>
     <tr>
         <td>Last name:</td>
-        <td valign="top"><input type="text" name="last" ></td></tr>
+        <td valign="top"><input type="text" name="last" size="25"></td></tr>
     <tr>
      <td>Password <br />(between 6 and 16 chars):</td>
      <td valign="top"><input type="password" name="passwd"
@@ -441,10 +441,12 @@ function display_registration_form() {
 function display_admin_menu() {
 ?>
 <br />
-<a href="index.php">Go to main site</a><br />
+<a href="index.php">Go to POS</a><br />
 <a href="insert_category_form.php">Add a new category</a><br />
 <a href="insert_product_form.php">Add a new product</a><br />
-<a href="change_password_form.php">Change admin password</a><br />
+<a href="manage_users.php">Manage user profiles</a><br />
+<a href="change_password_form.php">Change admin password</a><br /><br /><br />
+<a href="logout.php">Logout</a><br />
 <?php
 }
 
@@ -495,4 +497,69 @@ function display_user_menu() {
 <hr />
 <?
 <?php
+}
+
+function display_user_update_form($username, $first, $last, $email, $password  ) {
+?>
+ <form method="post" action="pos_usr_db_update.php">
+ <table bgcolor="#cccccc">
+   <tr>
+     <td>Email address:</td>
+     <td><input type="text" name="email" value = <?php print "$email";?> size="30"/></td>
+   </tr>
+   <tr>
+     <td>Preferred username <br />(max 16 chars):</td>
+     <td valign="top"><input type="text" readonly name="username" value=<?php print "$username";?>
+         size="16" maxlength="16"/</td>
+  </tr>
+   <tr>
+     <tr>
+       <td>First name:</td>
+       <td valign="top"><input type="text" name="first" value=<?php print "$first"; ?> </td></tr>
+     <tr>
+    <tr>
+        <td>Last name:</td>
+        <td valign="top"><input type="text" name="last" value=<?php print "$last"; ?> ></td></tr>
+    <tr>
+     <td>Password <br />(between 6 and 16 chars):</td>
+     <td valign="top"><input type="password" name="passwd"
+         size="16" maxlength="16"/></td></tr>
+   <tr>
+     <td>Confirm password:</td>
+     <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
+   <tr>
+     <td colspan=2 align="center">
+     <input type="submit" value="Update"></td></tr>
+ </table></form>
+<?php
+
+}
+
+function display_user_form($username, $first, $last, $email) {
+
+
+// Display the data to confirm
+
+  //now output the data from the insert to a simple html table...
+  print "<table border=4  CELLSPACING=4 CELLPADDING=4>";
+  print "<tr>";
+  print '<td BGCOLOR="#C0C0C0", align="center">User Name</td>';
+  print '<td BGCOLOR="#C0C0C0", align="center">First</td>';
+  print '<td BGCOLOR="#C0C0C0", align="center">Last</td>';
+  print '<td BGCOLOR="#C0C0C0", align="center">Email</td>';
+  print "</tr>";
+
+
+  print "<tr>";
+  print '<td align="center">'.$username."</td>";
+  print '<td align="left">'.$first."</td>";
+  print '<td align="left">'.$last."</td>";
+  print '<td align="center">'.$email."</td>";
+    print "</tr>";
+  print "</table>";
+
+
+  print "<br/><br/><br/><br/><br/><br/>";
+  echo'<td class="style2"><a href="pos_usr_del_db.php?id='.$username.'"onclick="javascript:return confirm(\'Are you sure you want to delete this User?\')">Confirm Delete</a>';"</td></tr>";
+
 }
