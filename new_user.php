@@ -3,8 +3,9 @@
 
  session_start();
  do_html_header("Add User");
-
- display_registration_form();
  require ("user_sidebar.php");
+
+ display_registration_form("add_user");
+
  do_html_footer();
 ?>

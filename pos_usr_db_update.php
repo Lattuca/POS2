@@ -5,7 +5,7 @@ require_once('POS_fns.php');
 require_once('output_fns.php');
 #session_start();
 do_html_header("POS Update User");
-
+include "user_sidebar.php";
 $username = $_POST['username'];
 $first = $_POST['first'];
 $last = $_POST['last'];
@@ -64,10 +64,10 @@ try   {
 
   // provide link to members page
   #do_html_header('Update successful');
-  echo "Your registration was successful.<br>";
+  echo "Your update was successful.<br>";
   #do_html_url('manage_users.php', 'Go to Manage Users page');
 
- include "user_sidebar.php";
+
  // end page
  do_html_footer();
 }

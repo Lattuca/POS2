@@ -5,6 +5,7 @@ require_once('POS_fns.php');
 require_once('output_fns.php');
 session_start();
 do_html_header("Delete User");
+include "user_sidebar.php";
 
 # Get the Users by user id (username)
 if (!isset($_POST['submit']))
@@ -35,7 +36,7 @@ try
     }
   }
 
-  include "user_sidebar.php";
+
   do_html_footer();
 
   ?>

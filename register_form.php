@@ -3,7 +3,7 @@
  do_html_header('User Registration');
 
 
- display_registration_form();
+ display_registration_form("register");
 
  do_html_footer();
 ?>

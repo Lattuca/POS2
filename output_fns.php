@@ -15,6 +15,8 @@ function do_html_header($title = '') {
   <html>
   <head>
     <title><?php echo $title; ?></title>
+
+
     <style>
       h2 { font-family: Arial, Helvetica, sans-serif; font-size: 22px; color: red; margin: 6px }
       body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
@@ -22,6 +24,7 @@ function do_html_header($title = '') {
       hr { color: #FF0000; width=70%; text-align=center}
       a { color: #000000 }
     </style>
+    <link rel="stylesheet" href="pos.css">
   </head>
   <body>
   <table width="100%" border="0" cellspacing="0" bgcolor="#cccccc">
@@ -405,9 +408,10 @@ function display_login_form() {
 <?php
 }
 
-function display_registration_form() {
-?>
- <form method="post" action="register_new.php">
+function display_registration_form($mode) {
+    ?>
+ <form method="post" action='register_new.php'>
+
  <table bgcolor="#cccccc">
    <tr>
      <td>Email address:</td>
@@ -433,8 +437,12 @@ function display_registration_form() {
      <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
    <tr>
      <td colspan=2 align="center">
-     <input type="submit" value="Register"></td></tr>
+     <input type="submit" value="Add"></td></tr>
+     <tr>
+       <td><input type ="hidden" name=mode value="<?php echo "$mode"; ?>"</td>
+     </tr>
  </table></form>
+
 <?php
 
 }

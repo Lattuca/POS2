@@ -5,7 +5,7 @@ require_once('POS_fns.php');
 require_once('output_fns.php');
 session_start();
 do_html_header("Current User List");
-
+include('user_sidebar.php');
 
 try {
   $db = db_connect();
@@ -37,7 +37,7 @@ foreach($result as $row) {
    }
  print "</table>";
 
- include('user_sidebar.php');
+
 
  // close the database connection
  $db = NULL;

@@ -13,6 +13,10 @@
   $passwd2=$_POST['passwd2'];
   $first=$_POST['first'];
   $last=$_POST['last'];
+  $mode =$_POST['mode'];
+
+
+  echo "Mode is $mode";
 
   // start session which may be needed later
   // start it now because it must go before headers
@@ -63,9 +67,15 @@
     $_SESSION['valid_user'] = $username;
 
     // provide link to members page
-    do_html_header('Registration successful');
-    echo "Your registration was successful.  Go to the members page! <br>";
-    #do_html_url('member.php', 'Go to Members Home Page');
+    if ($mode=="register"){
+       do_html_header('Registration successful');
+       echo "Your registration was successful.  Go to the new user page! <br>";
+       do_html_url('member.php', 'Go to Users Home Page');
+     }else{
+       do_html_header('New user added successfully');
+       echo "Your adding of new user was successful. Go to back to manager users page! <br>";
+       do_html_url('manage_users.php','Go to Manage Users Page');
+     }
 
    // end page
    do_html_footer();
