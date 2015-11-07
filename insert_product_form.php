@@ -2,9 +2,12 @@
 
 // include function files for this application
 require_once('POS_fns.php');
-session_start();
+#session_start();
 
-do_html_header("Add a Product");
+#do_html_header("Add a Product");
+require_once('POS_admin_header.php');
+do_html_heading("Add Product");
+
 require("product_sidebar.php");
 
 if (check_admin_user()) {

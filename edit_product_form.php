@@ -4,9 +4,12 @@
 require_once('POS_fns.php');
 
 
-session_start();
+#session_start();
 
-do_html_header("Edit product details");
+#do_html_header("Edit product details");
+require_once('POS_admin_header.php');
+do_html_heading("Edit Product");
+
 require_once("product_sidebar.php");
 if (check_admin_user()) {
   if ($product = get_product_details($_GET['id'])) {
@@ -14,7 +17,7 @@ if (check_admin_user()) {
   } else {
     echo "<p>Could not retrieve product details.</p>";
   }
-  do_html_url("admin.php", "Back to administration menu");
+  #do_html_url("admin.php", "Back to administration menu");
 } else {
   echo "<p>You are not authorized to enter the administration area.</p>";
 }

@@ -1,8 +1,10 @@
 <?php
 require_once('POS_fns.php');
 require_once('output_fns.php');
-session_start();
-do_html_header("POS Delete User from DB");
+#session_start();
+#do_html_header("POS Delete User from DB");
+require_once('POS_admin_header.php');
+do_html_heading("Delete user from database");
 include "user_sidebar.php";
 
 # Code for your web page follows

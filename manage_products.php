@@ -3,8 +3,10 @@
 // include function files for this application
 require_once('POS_fns.php');
 require_once('output_fns.php');
-session_start();
-do_html_header("Current Product List");
+#session_start();
+#do_html_header("Current Product List");
+require_once('POS_admin_header.php');
+do_html_heading("Currrent Product List");
 include('product_sidebar.php');
 
 try {
@@ -40,7 +42,7 @@ foreach($result as $row) {
    print '<td align="center">'.$row['last_update']."</td>";
    print "<td align='center'><a href='edit_product_form.php?id=" . $row['product_upc']  . "'>edit</a></td>";
    print "<td align='center'><a href='delete_product.php?id=" . $row['product_upc'] . "'>delete</a></td>";
-    
+
    }
  print "</table>";
 

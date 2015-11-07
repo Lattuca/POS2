@@ -453,12 +453,15 @@ function display_registration_form($mode) {
 function display_admin_menu() {
 ?>
 <br />
-<a href="index.php">Go to POS</a><br />
-<a href="insert_category_form.php">Add a new category</a><br />
-<a href="manage_products.php">Manage product inventory</a><br />
-<a href="manage_users.php">Manage user profiles</a><br />
-<a href="change_password_form.php">Change admin password</a><br /><br /><br />
+<ul>
+<li><a href="index.php">Go to POS</a><br /></li>
+<li><a href="insert_category_form.php">Add a new category</a><br /></li>
+<li><a href="manage_products.php">Manage product inventory</a><br /></li>
+<li><a href="manage_users.php">Manage user profiles</a><br /></li>
+<!-- <a href="change_password_form.php">Change admin password</a>-->
+<br /><br /><br />
 <a href="logout.php">Logout</a><br />
+</ul>
 <?php
 }
 
@@ -615,3 +618,13 @@ function display_product_delete_form($product_upc, $product_desc, $quantity, $pr
   echo'<td class="style2"><a href="pos_prod_del_db.php?id='.$product_upc.'"onclick="javascript:return confirm(\'Are you sure you want to delete this product?\')">Confirm Delete</a>';"</td></tr>";
 
 }
+function html_head($title) {
+  echo '<html lang="en">';
+  echo '<head>';
+  echo '<meta charset="utf-8">';
+  echo "<title>$title</title>";
+  echo '<link rel="stylesheet" href="pos.css">';
+  echo '</head>';
+  echo '<body>';
+}
+?>

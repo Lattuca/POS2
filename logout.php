@@ -8,7 +8,11 @@ unset($_SESSION['admin_user']);
 session_destroy();
 
 // start output html
-do_html_header("Logging Out");
+#do_html_header("Logging Out");
+require_once('POS_admin_header.php');
+do_html_heading("Logging Out");
+
+
 
 if (!empty($old_user)) {
   echo "<p>Logged out.</p>";

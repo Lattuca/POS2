@@ -3,12 +3,12 @@
 // include function files for this application
 require_once('POS_fns.php');
 require_once('output_fns.php');
-session_start();
-do_html_header("POS Update User");
+#session_start();
+#do_html_header("POS Update User");
+require_once('POS_admin_header.php');
+do_html_heading("Edit User Details");
+
 include "user_sidebar.php";
-
-
-# Get the Users by user id
 
 # Get the Users by user id
 if (!isset($_POST['submit']))

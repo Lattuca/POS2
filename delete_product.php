@@ -2,15 +2,17 @@
 
 // include function files for this application
 require_once('POS_fns.php');
-session_start();
-do_html_header("Delete Product");
+#session_start();
+#do_html_header("Delete Product");
+require_once('POS_admin_header.php');
+do_html_heading("Edit Product");
 require_once('product_sidebar.php');
 
 # Get the Users by user id (username)
 if (!isset($_POST['submit']))
 {
   $product_upc =$_GET['id'];
-  echo "record id is: $product_upc</br>";
+  #echo "record id is: $product_upc</br>";
 try
   {
     //open the database and find product

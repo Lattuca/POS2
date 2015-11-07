@@ -17,11 +17,12 @@
   }
 
   // if logged in as admin, show edit product links
-  if(check_admin_user()) {
+  /*if(check_admin_user()) {
     display_button("edit_product_form.php?product_upc=".$product_upc, "edit-item", "Edit Item");
     display_button("admin.php", "admin-menu", "Admin Menu");
     display_button($target, "continue", "Continue");
-  }
+  }*/
+  
   display_button("show_cart.php?new=".$product_upc, "add-to-cart",
                    "Add".$product['product_desc']." To My Shopping Cart");
   display_button($target, "continue-shopping", "Continue Shopping");

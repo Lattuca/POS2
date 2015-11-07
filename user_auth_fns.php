@@ -21,7 +21,7 @@ function login($username, $password) {
   $result = $conn->query("select * from user
                                    where username='".$username."'
                                    and  passwd = sha1('".$password."')");
-  echo "user name........ $username";
+  echo "<h3> User Name: $username </h3>";
   if (!$result) {
      return 0;
   }

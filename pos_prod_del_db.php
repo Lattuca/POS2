@@ -1,12 +1,14 @@
 <?php
 # include function files for this application
 require_once('POS_fns.php');
-session_start();
-do_html_header("Delete Product from Inventory");
+#session_start();
+#do_html_header("Delete Product from Inventory");
+require_once('POS_admin_header.php');
+do_html_heading("Delete Product from Inventory");
 require_once('product_sidebar.php');
 
 
-# Code for your web page follows
+# Code to delete product from the database
 # Point Of Sale Project
 
 

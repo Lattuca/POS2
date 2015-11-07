@@ -4,7 +4,10 @@
 require_once('POS_fns.php');
 require_once('output_fns.php');
 #session_start();
-do_html_header("POS Update User");
+#do_html_header("POS Update User");
+require_once('POS_admin_header.php');
+do_html_heading("Edit User Details");
+
 include "user_sidebar.php";
 $username = $_POST['username'];
 $first = $_POST['first'];

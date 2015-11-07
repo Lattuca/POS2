@@ -2,6 +2,8 @@
 
 // include function files for this application
 require_once('POS_fns.php');
+require_once('POS_admin_header.php');
+
 #session_start();
 
 if (($_POST['username']) && ($_POST['passwd'])) {
@@ -25,7 +27,7 @@ if (($_POST['username']) && ($_POST['passwd'])) {
     }
 }
 
-do_html_header("Administration");
+do_html_heading("POS Administration Menu");
 if (check_admin_user()) {
   display_admin_menu();
 } else {
