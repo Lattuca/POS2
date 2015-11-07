@@ -107,4 +107,78 @@ function calculate_items($cart) {
   }
   return $items;
 }
+
+function cvt_yes_no($input)
+{ if ($input==1){
+  return "Yes";
+  }
+else {
+  return  "No";
+  }
+}
+
+function cvt_boolean($input)
+  { if ($input =="Yes") {
+    return "1";
+  }else{
+    return "0";
+  }
+}
+
+function validate_product($oldproduct_upc, $product_upc, $product_desc, $quantity, $price, $cost){
+
+  $error_messages = array(); # Create empty error_messages array.
+
+  if (is_empty_field(trim($product_upc))){
+    array_push($error_messages, "Product UPC was not entered.");
+    return $error_messages; # stop now
+  }
+
+  # Check for duplicates
+
+  Try {
+
+    // check product does not already exist
+    if ($oldproduct_upc != $product_upc){
+      $conn = db_connect();
+      $query = "select *
+              from products
+              where product_upc='".$product_upc."'";
+
+      $result = $conn->query($query);
+      if ((!$result) || ($result->num_rows!=0)) {
+        array_push($error_messages, "Product UPC is not unique. Product UPC must be unique.");;
+      }
+    }
+    if (is_empty_field($product_desc)){
+      array_push($error_messages, "Product description was not entered.");
+    }
+    if (!is_numeric($quantity)){
+      array_push($error_messages, "Quantity must be numeric.");
+    }
+    if ( $quantity <0 ) {
+      array_push($error_messages, "Qunatity field cannot be negative.");
+    }
+    if (!is_numeric($price)){
+      array_push($error_messages, "Price must be numeric.");
+    }
+    if ( $price < 0 ) {
+      array_push($error_messages, "Price field cannot be negative.");
+    }
+    if (!is_numeric($cost)){
+      array_push($error_messages, "Cost must be numeric.");
+    }
+    if ( $cost < 0 ) {
+      array_push($error_messages, "Cost field cannot be negative.");
+    }
+  }
+  catch(Exception $e){
+    do_html_header('Problem:');
+    echo $e->getMessage();
+    do_html_footer();
+  exit;
+  }
+  return $error_messages;
+}
+
 ?>

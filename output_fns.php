@@ -154,10 +154,14 @@ function display_product_details($product) {
     echo "<td><ul>";
     echo "<li><strong>Product Description:</strong> ";
     echo $product['product_desc'];
-    echo "</li><li><strong>product_upc:</strong> ";
+    echo "</li><li><strong>Product UPC:</strong> ";
     echo $product['product_upc'];
+    echo "</li><li><strong>Quantity:</strong> ";
+    echo $product['quantity'];
     echo "</li><li><strong>Our Price:</strong> ";
     echo number_format($product['price'], 2);
+    echo "</li><li><strong>Product Notes:</strong> ";
+    echo number_format($product['available'], 2);
     echo "</li><li><strong>Product Notes:</strong> ";
     echo $product['product_notes'];
     echo "</li></ul></td></tr></table>";
@@ -451,7 +455,7 @@ function display_admin_menu() {
 <br />
 <a href="index.php">Go to POS</a><br />
 <a href="insert_category_form.php">Add a new category</a><br />
-<a href="insert_product_form.php">Add a new product</a><br />
+<a href="manage_products.php">Manage product inventory</a><br />
 <a href="manage_users.php">Manage user profiles</a><br />
 <a href="change_password_form.php">Change admin password</a><br /><br /><br />
 <a href="logout.php">Logout</a><br />
@@ -569,5 +573,45 @@ function display_user_form($username, $first, $last, $email) {
 
   print "<br/><br/><br/><br/><br/><br/>";
   echo'<td class="style2"><a href="pos_usr_del_db.php?id='.$username.'"onclick="javascript:return confirm(\'Are you sure you want to delete this User?\')">Confirm Delete</a>';"</td></tr>";
+
+}
+function display_product_delete_form($product_upc, $product_desc, $quantity, $price, $cost, $catid, $available, $product_notes) {
+
+
+// Display the data to confirm
+
+  echo "<table border=4  CELLSPACING=4 CELLPADDING=4>";
+  echo "<tr>";
+  echo '<td BGCOLOR="#C0C0C0", align="center">Product Code</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Description</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Quantity</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Price</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Cost</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Category</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Available</td>';
+  echo '<td BGCOLOR="#C0C0C0", align="center">Notes</td>';
+
+  echo "</tr>";
+
+  $available_yn = cvt_yes_no($available);
+
+
+  echo "<tr>";
+  echo '<td align="center"> '.$product_upc.'</td>';
+  echo '<td align="left"> '.$product_desc.'</td>';
+  echo '<td align="center">'.$quantity."</td>";
+  echo '<td align="right">'.$price."</td>";
+  echo '<td align="right">'.$cost."</td>";
+  echo '<td align="center">'.$catid."</td>";
+  echo '<td align="center"> '.$available_yn.' </td>';
+  #echo '<td><textarea readonly rows="4" cols="40">'.$product_notes.'</textarea></td>';
+  echo '<td align="left">'.$product_notes.'</textarea></td>';
+  echo "</tr>";
+  echo "</table>";
+
+
+  echo "<br/><br/><br/><br/><br/><br/>";
+
+  echo'<td class="style2"><a href="pos_prod_del_db.php?id='.$product_upc.'"onclick="javascript:return confirm(\'Are you sure you want to delete this product?\')">Confirm Delete</a>';"</td></tr>";
 
 }

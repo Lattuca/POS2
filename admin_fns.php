@@ -86,7 +86,7 @@ function display_product_form($product = '') {
   </tr>
   <tr>
     <td>Product Description:</td>
-    <td><input type="text" name="product_desc"
+    <td><input type="text" name="product_desc" size = "40"
          value="<?php echo $edit ? $product['product_desc'] : ''; ?>" /></td>
   </tr>
   <tr>
@@ -122,11 +122,20 @@ function display_product_form($product = '') {
           </select>
         </td>
    </tr>
+
    <tr>
     <td>Available:</td>
-    <td><input type="text" name="available"
-               value="<?php echo $edit ? $product['available'] : '1'; ?>" /></td>
-   </tr>
+     <?php
+         if ($edit){
+           if ($product['available'] ==1){
+             echo '<td><input type="checkbox" id="available" name="available" value ="'.$product['available'].'" checked = "checked" > </td>';
+            }else{
+              echo '<td><input type="checkbox" id="available" name="available" value ="'.$product['available'].'">  </td>';
+            }
+          }else{
+            echo '<td align="left"><input type="checkbox" name="available" value = "1" checked> </td>';
+         }
+      ?>
    <tr>
      <td>Notes:</td>
         <td><textarea rows="3" cols="50"
@@ -260,7 +269,7 @@ function update_category($catid, $catname) {
 }
 
 function update_product($oldproduct_upc, $product_upc, $product_desc,
-                         $quantity, $price, $cost, $catid, $availble, $product_notes) {
+                         $quantity, $price, $cost, $catid, $available, $product_notes) {
 // change details of product stored under $oldproduct_upc in
 // the database to new details in arguments
 

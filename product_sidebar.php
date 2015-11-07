@@ -3,12 +3,12 @@
   <nav>
     <ul>
       <li>
-        <a href="manage_users.php">User List</a><br/>
+        <a href="manage_products.php">Product List</a><br/>
       </li>
     </ul>
     <ul>
       <li>
-        <a href="new_user.php">Add New User</a><br/>
+        <a href="insert_product_form.php">Add New Product</a><br/>
       </li>
     </ul>
     <ul>
