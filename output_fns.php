@@ -518,7 +518,7 @@ function display_user_menu() {
 <!-- <a href="recommend.php">Recommend URLs to me</a> &nbsp;|&nbsp; -->
 <a href="logout.php">Logout</a>
 <hr />
-<?
+
 <?php
 }
 
