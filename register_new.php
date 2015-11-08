@@ -1,7 +1,7 @@
 <?php
   // include function files for this application
   require_once('POS_fns.php');
-
+  require_once('POS_admin_header.php');
 
   # get input from user for registration
   //create short variable names
@@ -16,7 +16,7 @@
   $mode =$_POST['mode'];
 
 
-  echo "Mode is $mode";
+  #echo "Mode is $mode";
 
   // start session which may be needed later
   // start it now because it must go before headers
@@ -72,15 +72,16 @@
        echo "Your registration was successful.  Go to the new user page! <br>";
        do_html_url('member.php', 'Go to Users Home Page');
      }else{
-       do_html_header('New user added successfully');
-       echo "Your adding of new user was successful. Go to back to manager users page! <br>";
-       do_html_url('manage_users.php','Go to Manage Users Page');
+       #do_html_header('New user added successfully');
+       require_once('user_sidebar.php');
+       echo "Your adding of new user was successful <br>";
+       #do_html_url('manage_users.php','Go to Manage Users Page');
      }
 
    // end page
    do_html_footer();
   }
-  catch (Exception $e) {
+  catch (PDOException $e) {
      do_html_header('Problem:');
      echo $e->getMessage();
      do_html_footer();

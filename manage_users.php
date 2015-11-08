@@ -11,7 +11,8 @@ do_html_heading("Current User List");
 include('user_sidebar.php');
 
 try {
-  $db = db_connect();
+  #$db = db_connect();
+  $db= db_pdo_open()
 ?>
 
   <table border=4  CELLSPACING=0 CELLPADDING=0>
@@ -45,7 +46,7 @@ foreach($result as $row) {
  // close the database connection
  $db = NULL;
 
-} catch (Exception $e) {
+} catch (PDOException $e) {
   echo 'Exception : '.$e->getMessage();
   echo "<br/>";
   $db = NULL;
