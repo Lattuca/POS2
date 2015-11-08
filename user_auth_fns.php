@@ -32,7 +32,7 @@ function login($username, $password) {
 
     $rows = $result->num_rows;
     if ($result->num_rows>0) {
-     return 1;
+      return 1;
     } else {
       return 0;
     }

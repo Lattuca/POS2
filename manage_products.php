@@ -9,8 +9,17 @@ require_once('POS_admin_header.php');
 do_html_heading("Currrent Product List");
 include('product_sidebar.php');
 
+#define("DB_PATH","mysql:host=localhost;dbname=clattuca_dev");
+#define("DB_LOGIN","clattuca");
+#define("DB_PW","latt8707");
+
 try {
-  $db = db_connect();
+  #$db = db_connect();
+
+  #open database
+
+  $db= db_pdo_open()
+
 ?>
 
   <table border=4  CELLSPACING=0 CELLPADDING=0>
@@ -46,12 +55,10 @@ foreach($result as $row) {
    }
  print "</table>";
 
-
-
  // close the database connection
  $db = NULL;
 
-} catch (Exception $e) {
+} catch (PDOException $e) {
   echo 'Exception : '.$e->getMessage();
   echo "<br/>";
   $db = NULL;

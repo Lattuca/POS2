@@ -6,6 +6,8 @@
 
  html_head("Carmelo POS System");
 
+ session_start();
+ $_SESSION['logged_in']=0;
  display_login_form();
 
  do_html_footer();

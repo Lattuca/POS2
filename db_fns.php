@@ -14,6 +14,12 @@ function db_connect() {
    return $result;
 }
 
+function db_pdo_open(){
+  $result = new PDO(DB_PATH, DB_LOGIN, DB_PW);
+  $result->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  return $result;
+}
+
 function db_result_to_array($result) {
    $res_array = array();
 

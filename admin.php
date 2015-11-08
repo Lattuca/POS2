@@ -9,7 +9,12 @@ session_start();
  #$username = $_POST['username'];
  #echo "logging in...$username";
 
-if (($_POST['username']) && ($_POST['passwd'])) {
+
+if ($_SESSION['logged_in'] == 1){
+  display_admin_menu();
+  do_html_footer();
+}else{
+  if (($_POST['username']) && ($_POST['passwd'])) {
 	// they have just tried logging in
 
     $username = $_POST['username'];
@@ -17,7 +22,7 @@ if (($_POST['username']) && ($_POST['passwd'])) {
 
     if (login($username, $passwd)) {
       // if they are in the database register the user id
-
+       $_SESSION['logged_in'] = 1;
        display_admin_menu();
        do_html_footer();
    } else {
@@ -27,10 +32,12 @@ if (($_POST['username']) && ($_POST['passwd'])) {
       do_html_footer();
       exit;
     }
-}else{
+  }else{
   # Blank username or password entered
-  echo "<p>You must enter a username and password to login.<br/></p>";
-  do_html_url('POS_login.php', 'Login');
-  do_html_footer();
+    echo "<p>You must enter a username and password to login.<br/></p>";
+    do_html_url('POS_login.php', 'Login');
+    do_html_footer();
+ }
 }
+
 ?>
