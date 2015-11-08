@@ -12,11 +12,11 @@ INSERT INTO products VALUES ('987654321', 'Sweet Italian Sausage', 20, 5.99, 3.9
 
 
 INSERT INTO categories VALUES (1,'Books','2015-10-24-15');
-INSERT INTO categories VALUES (2,'Food','2015-10-24-15');
+INSERT INTO categories VALUES (2,'Electronics','2015-10-24-15');
+INSERT INTO categories VALUES (3,'Food','2015-10-24-15');
 INSERT INTO categories VALUES (4,'Medical','2015-10-24-15');
-INSERT INTO categories VALUES (5,'Electronics','2015-10-24-15');
-INSERT INTO categories VALUES (6,'Outdoor','2015-10-24-15');
-INSERT INTO categories VALUES (7,'Other','2015-10-24-15');
+INSERT INTO categories VALUES (5,'Outdoor','2015-10-24-15');
+INSERT INTO categories VALUES (6,'Other','2015-10-24-15');
 
 
 

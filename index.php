@@ -6,7 +6,7 @@
   session_start();
   do_html_header("Welcome Carmelo's POS");
 
-  echo "<p>Please choose a category:</p>";
+  echo "<h3>Please choose a category from list below:</h3>";
 
   // get categories out of database
   $cat_array = get_categories();

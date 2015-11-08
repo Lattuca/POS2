@@ -3,8 +3,10 @@
 // include function files for this application
 require_once('POS_fns.php');
 session_start();
-$old_user = $_SESSION['admin_user'];  // store  to test if they *were* logged in
-unset($_SESSION['admin_user']);
+$old_user = isset($_SESSION['admin_user']) ? $_SESSION['admin_user'] : NULL;
+#$old_user = $_SESSION['admin_user'];  // store  to test if they *were* logged in
+#unset($_SESSION['admin_user']);
+unset($old_user);
 session_destroy();
 
 // start output html

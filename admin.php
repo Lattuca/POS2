@@ -4,7 +4,10 @@
 require_once('POS_fns.php');
 require_once('POS_admin_header.php');
 
-#session_start();
+
+session_start();
+ $username = $_POST['username'];
+ echo "logging in...$username";
 
 if (($_POST['username']) && ($_POST['passwd'])) {
 	// they have just tried logging in
@@ -14,25 +17,20 @@ if (($_POST['username']) && ($_POST['passwd'])) {
 
     if (login($username, $passwd)) {
       // if they are in the database register the user id
-      $_SESSION['admin_user'] = $username;
 
+       display_admin_menu();
+       do_html_footer();
    } else {
       // unsuccessful login
-      do_html_header("Problem:");
-      echo "<p>You could not be logged in.<br/>
-            You must be logged in to view this page.</p>";
+      echo "<p>Invalid username or password entered.<br/></p>";
       do_html_url('POS_login.php', 'Login');
       do_html_footer();
       exit;
     }
+}else{
+  # Blank username or password entered
+  echo "<p>You must enter a username and password to login.<br/></p>";
+  do_html_url('POS_login.php', 'Login');
+  do_html_footer();
 }
-
-do_html_heading("POS Administration Menu");
-if (check_admin_user()) {
-  display_admin_menu();
-} else {
-  echo "<p>You are not authorized to enter the administration area.</p>";
-}
-do_html_footer();
-
 ?>

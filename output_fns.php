@@ -5,11 +5,14 @@ function do_html_header($title = '') {
   #session_start();
   #echo " before session varaibles.......................";
   // declare the session variables we want access to inside the function
-  if (!$_SESSION['items']) {
-    $_SESSION['items'] = '0';
+
+  $items = isset($_SESSION['items']) ? $_SESSION['items'] : NULL;
+  $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : NULL;
+  if (!$items) {
+    $items = '0';
   }
-  if (!$_SESSION['total_price']) {
-    $_SESSION['total_price'] = '0.00';
+  if (!$total_price) {
+    $total_price = '0.00';
   }
 ?>
   <html>
@@ -35,10 +38,12 @@ function do_html_header($title = '') {
   </td>
   <td align="right" valign="bottom">
   <?php
-     if(isset($_SESSION['admin_user'])) {
+     $admin_user = isset($_SESSION['admin_user']) ? $_SESSION['admin_user'] : NULL;
+     $items = isset($_SESSION['items']) ? $_SESSION['items'] : 0;
+     if($admin_user) {
        echo "&nbsp;";
      } else {
-       echo "Total Items = ".$_SESSION['items'];
+       echo "Total Items = ".$items;
      }
   ?>
   </td>
@@ -54,10 +59,12 @@ function do_html_header($title = '') {
   <tr>
   <td align="right" valign="top">
   <?php
-     if(isset($_SESSION['admin_user'])) {
+     $admin_user = isset($_SESSION['admin_user']) ? $_SESSION['admin_user'] : NULL;
+     $total_price = isset($_SESSION['total_price']) ? $_SESSION['total_price'] : NULL;
+     if($admin_user) {
        echo "&nbsp;";
      } else {
-       echo "Total Price = $".number_format($_SESSION['total_price'],2);
+       echo "Total Price = $".number_format($total_price,2);
      }
   ?>
   </td>
@@ -115,7 +122,7 @@ function display_products($product_array) {
   } else {
     //create table
     echo "<table width=\"100%\" border=\"0\">";
-
+    echo "<h3> Select Product to Purchase from List</h3>";
     //create a table row for each product
     foreach ($product_array as $row) {
       $url = "show_product.php?product_upc=".$row['product_upc'];
@@ -128,7 +135,7 @@ function display_products($product_array) {
         echo "&nbsp;";
       }
       echo "</td><td>";
-      $title = $row['product_upc']." by ".$row['product_desc'];
+      $title = $row['product_upc']." description ".$row['product_desc'];
       do_html_url($url, $title);
       echo "</td></tr>";
     }
@@ -152,16 +159,17 @@ function display_product_details($product) {
       }
     }
     echo "<td><ul>";
-    echo "<li><strong>Product Description:</strong> ";
-    echo $product['product_desc'];
+    #echo "<li><strong>Product Description:</strong> ";
+    #echo $product['product_desc'];
     echo "</li><li><strong>Product UPC:</strong> ";
     echo $product['product_upc'];
     echo "</li><li><strong>Quantity:</strong> ";
     echo $product['quantity'];
     echo "</li><li><strong>Our Price:</strong> ";
     echo number_format($product['price'], 2);
-    echo "</li><li><strong>Product Notes:</strong> ";
-    echo number_format($product['available'], 2);
+    echo "</li><li><strong>Product Available:</strong> ";
+    $available_yn = cvt_yes_no($product['available']);
+    echo "$available_yn";
     echo "</li><li><strong>Product Notes:</strong> ";
     echo $product['product_notes'];
     echo "</li></ul></td></tr></table>";
@@ -192,7 +200,7 @@ function display_checkout_form() {
   </tr>
   <tr>
     <td>State</td>
-    <td><input type="text" name="state" value="" maxlength="20" size="40"/></td>
+    <td><select name="state"> <?php echo StateDropdown('CA', 'abbrev'); ?></select></td>
   </tr>
   <tr>
     <td>Zip Code</td>
@@ -390,7 +398,7 @@ function display_login_form() {
 ?>
 <!-- <p><a href="register_form.php">Not a member?</a></p> -->
 <p><a href="register_form.php">Not a member?</a></p>
- <!-- <form method="post" action="member.php"> -->
+ <!--<form method="post" action="member.php"> -->
  <!-- <form method="post" action="index.php"> -->
  <form method="post" action="admin.php">
  <table bgcolor="#cccccc">

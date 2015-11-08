@@ -1,6 +1,7 @@
 <?php
   //include our function set
   include ('POS_fns.php');
+  require_once('state_drop_down.php');
 
   // The shopping cart needs sessions, so start one
   session_start();

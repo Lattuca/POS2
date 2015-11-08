@@ -22,7 +22,7 @@
     display_button("admin.php", "admin-menu", "Admin Menu");
     display_button($target, "continue", "Continue");
   }*/
-  
+
   display_button("show_cart.php?new=".$product_upc, "add-to-cart",
                    "Add".$product['product_desc']." To My Shopping Cart");
   display_button($target, "continue-shopping", "Continue Shopping");
