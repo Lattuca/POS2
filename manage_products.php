@@ -40,13 +40,14 @@ try {
 $query = "SELECT * from products";
 $result = $db->query($query);
 foreach($result as $row) {
+   $category = get_category_name($row['catid']);
    print "<tr>";
    print '<td align="left">'.$row['product_upc']."</td>";
    print "<td>".$row['product_desc']."</td>";
    print '<td align="center">'.$row['quantity']."</td>";
    print '<td align="center">'.$row['price']."</td>";
    print '<td align="center">'.$row['cost']."</td>";
-   print '<td align="center">'.$row['catid']."</td>";
+   print "<td align='center'> $category </td>";
    print '<td align="center">'.$row['available']."</td>";
    print '<td align="center">'.$row['last_update']."</td>";
    print "<td align='center'><a href='edit_product_form.php?id=" . $row['product_upc']  . "'>edit</a></td>";

@@ -63,18 +63,7 @@ function display_product_form($product = '') {
 
   // if passed an existing product, proceed in "edit mode"
   $edit = is_array($product);
-  echo "display product Form..edit is..$edit";
-  // most of the form is in plain HTML with some
-  // optional PHP bits throughout
-  /*
-  product_upc
-   product_desc
-   quantity
-   price
-   cost
-   catid
-   available
-   product_notes  */
+
 ?>
   <form method="post"
         action="<?php echo $edit ? 'edit_product.php' : 'insert_product.php';?>">
@@ -255,7 +244,7 @@ function insert_product($product_upc, $product_desc, $quantity, $price, $cost, $
 
    $result = $conn->query($query);
    if (!$result) {
-     die($result->error);
+     #die($result->error);
      return false;
    } else {
      return true;

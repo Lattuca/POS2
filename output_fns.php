@@ -396,14 +396,12 @@ function display_cart($cart, $change = true, $images = 1) {
 function display_login_form() {
   // dispaly form asking for name and password
 ?>
-<!-- <p><a href="register_form.php">Not a member?</a></p> -->
-<p><a href="register_form.php">Not a member?</a></p>
- <!--<form method="post" action="member.php"> -->
- <!-- <form method="post" action="index.php"> -->
+
+ <br/><br/>
  <form method="post" action="admin.php">
  <table bgcolor="#cccccc">
   <tr>
-    <td colspan="2">Members log in here:</td>
+    <td colspan="2">POS2 Users log in:</td>
   <tr>
     <td>Username:</td>
     <td><input type="text" name="username"/></td></tr>
@@ -413,9 +411,6 @@ function display_login_form() {
   <tr>
     <td colspan="2" align="center">
     <input type="submit" value="Log in"/></td></tr>
-  <tr>
-    <td colspan="2"><a href="forgot_form.php">Forgot your password?</a></td>
-  </tr>
 </table></form>
 <?php
 }
@@ -468,7 +463,9 @@ function display_admin_menu() {
 <li><a href="manage_users.php">Manage user profiles</a><br /></li>
 <!-- <a href="change_password_form.php">Change admin password</a>-->
 <br /><br /><br />
-<a href="logout.php">Logout</a><br />
+<?php display_button("logout.php", "log-out", "Log Out"); ?>
+<!--<a href="logout.php">Logout</a><br />-->
+
 </ul>
 <?php
 }

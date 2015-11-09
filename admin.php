@@ -35,6 +35,7 @@ if ($_SESSION['logged_in'] == 1){
   }else{
   # Blank username or password entered
     echo "<p>You must enter a username and password to login.<br/></p>";
+
     do_html_url('POS_login.php', 'Login');
     do_html_footer();
  }

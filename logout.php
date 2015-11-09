@@ -21,8 +21,12 @@ if (!empty($old_user)) {
   do_html_url("POS_login.php", "Login");
 } else {
   // if they weren't logged in but came to this page somehow
-  echo "<p>You were not logged in, and so have not been logged out.</p>";
-  do_html_url("POS_login.php", "Login");
+  echo "<p>You were not logged in.</p>";
+  #do_html_url("POS_login.php", "Login");
+
+  echo '<form method="post" action="POS_login.php">';
+  echo '<tr> <td colspan="2" align="center">
+    <input type="submit" value="Log in"/></td></tr>';
 }
 
 do_html_footer();

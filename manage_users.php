@@ -33,8 +33,8 @@ foreach($result as $row) {
    print "<tr>";
    print '<td align="left">'.$row['username']."</td>";
    print "<td>".$row['first']."</td>";
-   print '<td align="center">'.$row['last']."</td>";
-   print '<td align="center">'.$row['email']."</td>";
+   print '<td align="left">'.$row['last']."</td>";
+   print '<td align="left">'.$row['email']."</td>";
    print '<td align="center">'.$row['last_update']."</td>";
    print "<td align='center'><a href='pos_usr_update.php?id=" . $row['username']  . "'>edit</a></td>";
    print "<td align='center'><a href='pos_usr_delete.php?id=" . $row['username'] . "'>delete</a></td>";
