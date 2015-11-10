@@ -632,4 +632,15 @@ function html_head($title) {
   echo '</head>';
   echo '<body>';
 }
+
+function show_login_button(){
+echo '<form method="post" action="POS_login.php">';
+echo '<tr> <td colspan="2" align="center">
+  <input type="submit" value="Log in"/></td></tr>';
+}
+
+function show_user_details($username){
+  $now = date("F j, Y, g:i a");
+  echo "<strong> User:</strong> $username <strong> Date: </strong> $now </h4>";
+}
 ?>

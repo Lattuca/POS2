@@ -6,6 +6,11 @@
   session_start();
   do_html_header("Welcome Carmelo's POS");
 
+  if (isset($_POST['username'])) {
+    $_SESSION['username'] = $_POST['username'];
+  }
+  show_user_details($_SESSION['username']);
+
   echo "<h3>Please choose a category from list below:</h3>";
 
   // get categories out of database
