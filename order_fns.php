@@ -86,7 +86,6 @@ orderid int unsigned not null auto_increment primary key,
                date = '".$date."' and
                order_status = 'PARTIAL';";
 
-  #echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx $query";
   $result = $conn->query($query);
 
   if($result->num_rows>0) {

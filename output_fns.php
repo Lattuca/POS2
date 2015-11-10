@@ -461,10 +461,11 @@ function display_admin_menu() {
 <li><a href="insert_category_form.php">Add a new category</a><br /></li>
 <li><a href="manage_products.php">Manage product inventory</a><br /></li>
 <li><a href="manage_users.php">Manage user profiles</a><br /></li>
-<!-- <a href="change_password_form.php">Change admin password</a>-->
+<li><a href="display_orders.php">Display orders</a><br /></li>
+
 <br /><br /><br />
 <?php display_button("logout.php", "log-out", "Log Out"); ?>
-<!--<a href="logout.php">Logout</a><br />-->
+
 
 </ul>
 <?php
@@ -643,4 +644,26 @@ function show_user_details($username){
   $now = date("F j, Y, g:i a");
   echo "<strong> User:</strong> $username <strong> Date: </strong> $now </h4>";
 }
+function get_customer_name($customerid){
+
+  // Function to obtain customer name
+
+  $conn = db_connect();
+
+  $query = "select * from customers where customerid = $customerid";
+
+  $result = @$conn->query($query);
+  if (!$result) {
+    return false;
+  }
+  $num_custs = @$result->num_rows;
+  if ($num_custs == 0) {
+     return false;
+  }
+  $row = $result->fetch_object();
+  return $row->name;
+  }
+
+
+
 ?>

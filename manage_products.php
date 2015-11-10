@@ -9,10 +9,6 @@ require_once('POS_admin_header.php');
 do_html_heading("Currrent Product List");
 include('product_sidebar.php');
 
-#define("DB_PATH","mysql:host=localhost;dbname=clattuca_dev");
-#define("DB_LOGIN","clattuca");
-#define("DB_PW","latt8707");
-
 try {
   #$db = db_connect();
 

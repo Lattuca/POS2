@@ -214,24 +214,7 @@ function insert_product($product_upc, $product_desc, $quantity, $price, $cost, $
 // insert a new product into the database
 //
 
-  /* #$conn = db_connect();
-   $conn = db_pdo_open();
 
-   // check product does not already exist
-   /*$query = "select *
-             from products
-             where product_upc='".$product_upc."'";
-
-   $result = $conn->query($query);
-   if ((!$result) || ($result->num_rows!=0)) {
-     return false;
-   }
-   //check for duplicate title name
-       $sql = "SELECT COUNT(*) FROM products WHERE product_upc = '$product_upc'";
-       $result = $db->query($sql)->fetch(); //count the number of entries with the tool name
-       if ( $result[0] > 0) {
-         try_again($product_upc." is not unique. Product UPC must be unique.");
-       }*/
 
    // insert new product
    $conn = db_connect();
