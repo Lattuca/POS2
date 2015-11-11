@@ -256,15 +256,7 @@ function update_product($oldproduct_upc, $product_upc, $product_desc,
 // the database to new details in arguments
 
    $conn = db_connect();
-/*
-  product_upc
-   product_desc
-   quantity
-   price
-   cost
-   catid
-   available
-   product_notes  */
+
    $query = "update products
              set product_upc= '".$product_upc."',
              product_desc = '".$product_desc."',

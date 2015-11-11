@@ -2,7 +2,7 @@
 function process_card($card_details) {
   // connect to payment gateway or
   // use gpg to encrypt and mail or
-  // store in DB if you really want to
+  // store in DB if you really want to ff
 
   return true;
 }
@@ -11,17 +11,6 @@ function insert_order($order_details) {
   // extract order_details out as variables
 
   extract($order_details);
-
-  // set shipping address same as address
-  /*if((!$ship_name) && (!$ship_address) && (!$ship_city) && (!$ship_state) && (!$ship_zip) && (!$ship_country)) {
-    $ship_name = $name;
-    $ship_address = $address;
-    $ship_city = $city;
-    $ship_state = $state;
-    $ship_zip = $zip;
-    $ship_country = $country;
-  }
-  */
 
   $conn = db_connect();
 
@@ -47,44 +36,37 @@ function insert_order($order_details) {
     $query = "insert into customers (name, address, city, state, zip, country) values
             ('$name','$address','$city','$state','$zip','$country')";
     $result = $conn->query($query);
-   #echo "<br> we are now insert after customers query result $query";
+    echo "<br> we are now insert after customers query result $query";
     if (!$result) {
        return false;
-
     }
+    $customerid = $conn->insert_id;
    #echo "<br> we are now insert after after customers insert query result $query";
   }
 
-  $customerid = $conn->insert_id;
-  #echo "customer id is $customerid";
+  #$customerid = $conn->insert_id;
+  #echo "<br />customer id is $customerid";
 
   $date = date("Y-m-d");
-/*
-orderid int unsigned not null auto_increment primary key,
-  customerid int unsigned not null,
-  amount float(6,2),
-  date date not null,
-  order_status char(10), */
 
-  #$query = "insert into orders values
-  #           ('', '".$customerid."', '".$_SESSION['total_price']."', '".$date."', 'PARTIAL')";
+  echo "Customer id is $customerid";
 
   $total_price = $_SESSION['total_price'];
   $query = "insert into orders (customerid, amount, date, order_status ) values
-            ('$customerid', '$total_price', '$date', 'PARTIAL')";
+            ('$customerid', '$total_price', '$date', 'COMPLETE')";
 
   $result = $conn->query($query);
   #echo "<br> we are now insert after orders query result $query";
   if (!$result) {
     return false;
   }
-
+  #echo "No error on order insert <br />";
   $query = "select orderid from orders where
                customerid = '".$customerid."' and
                amount > (".$_SESSION['total_price']."-.001) and
                amount < (".$_SESSION['total_price']."+.001) and
                date = '".$date."' and
-               order_status = 'PARTIAL';";
+               order_status = 'COMPLETE';";
 
   $result = $conn->query($query);
 
@@ -94,6 +76,9 @@ orderid int unsigned not null auto_increment primary key,
   } else {
     return false;
   }
+
+
+  #echo "before order_items insert <br/>";
 
   // insert each product
   foreach($_SESSION['cart'] as $product_upc => $quantity) {
@@ -107,7 +92,12 @@ orderid int unsigned not null auto_increment primary key,
     if(!$result) {
       return false;
     }
+
+    # update product quantity
+
+    update_product_quantity($product_upc, $quantity);
   }
+
 
   // end transaction
   $conn->commit();

@@ -46,9 +46,11 @@ function get_products($catid) {
    if ((!$catid) || ($catid == '')) {
      return false;
    }
-
+   # load products that are available and quantity > 0
    $conn = db_connect();
-   $query = "select * from products where catid = '".$catid."'";
+   $query = "select * from products where catid = '".$catid."' AND available = '1' AND quantity > '0'";
+   echo "load product array $query <br />";
+
    $result = @$conn->query($query);
    if (!$result) {
      return false;
@@ -181,4 +183,51 @@ function validate_product($oldproduct_upc, $product_upc, $product_desc, $quantit
   return $error_messages;
 }
 
+function update_product_quantity($product_upc, $quantity_purchased) {
+
+// Function to updated product quanity
+
+try {
+
+  # get current product quantity for update
+
+  $conn = db_connect();
+  $query = "select * from products where product_upc = $product_upc";
+  $result = @$conn->query($query);
+  if (!$result) {
+    echo "error in fetching $product_upc <br />";
+    return false;
+  }
+  $num_prods = @$result->num_rows;
+  if ($num_prods == 0) {
+     return false;
+  }
+  $row = $result->fetch_object();
+  $product_qty = $row->quantity;
+  #echo "product qty for $product_upc is".$product_qty."<br/>";
+  $product_qty = $product_qty - $quantity_purchased;
+  #echo "new product qty for $product_upc is".$product_qty."<br/>";
+
+  # now we update the database with the new quantity
+
+  $query = "update products set quantity = '".$product_qty."' where product_upc = $product_upc";
+  #echo "update qty query is $query";
+  # update product table
+  $result = @$conn->query($query);
+  if (!$result) {
+    echo "error updated product qty <br />";
+    return false;
+  } else {
+    #echo "successfully updated product qty <br />";
+    return true;
+  }
+}
+catch(Exception $e){
+  do_html_header('Problem:');
+  echo $e->getMessage();
+  do_html_footer();
+exit;
+}
+
+}
 ?>
