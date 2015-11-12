@@ -19,8 +19,13 @@
     display_shipping(calculate_shipping_cost());
 
     if(process_card($_POST)) {
-      //empty shopping cart
-      #session_destroy();
+      //empty shopping cart but keep the username
+      $username = $_SESSION['username'];
+      session_destroy();
+      session_start();
+      $_SESSION['username'] = $username;
+      #echo "username is $username and session username is $_SESSION['username']";
+
       echo "<p>Thank you for shopping with us. Your order has been placed.</p>";
       display_button("index.php", "continue-shopping", "Continue Shopping");
     } else {

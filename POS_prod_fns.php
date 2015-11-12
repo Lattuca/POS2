@@ -49,7 +49,7 @@ function get_products($catid) {
    # load products that are available and quantity > 0
    $conn = db_connect();
    $query = "select * from products where catid = '".$catid."' AND available = '1' AND quantity > '0'";
-   echo "load product array $query <br />";
+   #echo "load product array $query <br />";
 
    $result = @$conn->query($query);
    if (!$result) {
