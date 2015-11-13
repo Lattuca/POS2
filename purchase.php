@@ -20,8 +20,7 @@
 
   // if filled out
   if (($_SESSION['cart']) && ($name) && ($address) && ($city) && ($zip) && ($country)) {
-    // able to insert into database
-          #echo "Purchase....... CART";
+
     if(insert_order($_POST) != false ) {
       //display cart, not allowing changes and without pictures
       display_cart($_SESSION['cart'], false, 0);
@@ -33,7 +32,7 @@
 
       display_button("show_cart.php", "continue-shopping", "Continue Shopping");
     } else {
-      echo "<p>Could not store data, please try again.</p>";
+      echo "<p>Could not store data, please try again.</p><hr />";
       display_button('checkout.php', 'back', 'Back');
     }
   } else {

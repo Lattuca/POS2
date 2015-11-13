@@ -29,13 +29,12 @@
       session_destroy();
       session_start();
       $_SESSION['username'] = $username;
-      ($_SESSION['logged_in'] = 1;
-      #echo "username is $username and session username is $_SESSION['username']";
+      $_SESSION['logged_in'] = 1;
 
-      echo "<p>Thank you for shopping with us. Your order has been placed.</p>";
+      echo "<p>Thank you for shopping with us. Your order has been placed.</p><hr />";
       display_button("index.php", "continue-shopping", "Continue Shopping");
     } else {
-      echo "<p>Could not process your card. Please contact the card issuer or try again.</p>";
+      echo "<p>Could not process your card. Please contact the card issuer or try again.</p><hr />";
       display_button("purchase.php", "back", "Back");
     }
   } else {

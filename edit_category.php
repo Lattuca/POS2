@@ -13,12 +13,12 @@ require_once("category_sidebar.php");
 
   if (filled_out($_POST)) {
     if(update_category($_POST['catid'], $_POST['catname'])) {
-      echo "<p>Category was updated.</p>";
+      echo "<p>Category was updated.</p><hr />";
     } else {
-      echo "<p>Category could not be updated.</p>";
+      echo "<p>Category could not be updated.</p><hr />";
     }
   } else {
-    echo "<p>You have not filled out the form.  Please try again.</p>";
+    echo "<p>You have not filled out the form.  Please try again.</p><hr />";
   }
 do_html_footer();
 

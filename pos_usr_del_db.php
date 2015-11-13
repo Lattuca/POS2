@@ -31,7 +31,7 @@ if (!isset($_POST['submit']))
       throw new Exception('Could not delete you in database - please try again later.');
     }
 
-    print "User successfully deleted............................<br/>";
+    echo "<p>User successfully deleted.</p><hr />";
   }
   catch(PDOException $e)
   {

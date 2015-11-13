@@ -14,16 +14,16 @@ if (check_admin_user()) {
   if (filled_out($_POST))   {
     $catname = $_POST['catname'];
     if(insert_category($catname)) {
-      echo "<p>Category \"".$catname."\" was added to the database.</p>";
+      echo "<p>Category \"".$catname."\" was added to the database.</p><hr />";
     } else {
-      echo "<p>Category \"".$catname."\" could not be added to the database.</p>";
+      echo "<p>Category \"".$catname."\" could not be added to the database.</p><hr />";
     }
   } else {
-    echo "<p>You have not filled out the form.  Please try again.</p>";
+    echo "<p>You have not filled out the form.  Please try again.</p><hr />";
   }
   #do_html_url('admin.php', 'Back to administration menu');
 } else {
-  echo "<p>You are not authorised to view this page.</p>";
+  echo "<p>You are not authorised to view this page.</p><hr />";
 }
 
 do_html_footer();

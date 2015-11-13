@@ -10,10 +10,9 @@ require_once('POS_admin_header.php');
   if (isset($_POST['username'])) {
     $_SESSION['username'] = $_POST['username'];
   }
-  show_user_details($_SESSION['username']);
-
 
  if ($_SESSION['logged_in'] == 1){
+  show_user_details($_SESSION['username']);
   display_admin_menu();
   do_html_footer();
 }else{
@@ -38,9 +37,9 @@ require_once('POS_admin_header.php');
     }
   }else{
   # Blank username or password entered
-    echo "<p>You must enter a username and password to login.<br/></p>";
+    echo "<p>You must enter a username and password to login.<br/></p><hr />";
     show_login_button();
-  
+
     do_html_footer();
  }
 }

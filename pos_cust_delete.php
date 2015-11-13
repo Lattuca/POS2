@@ -9,15 +9,15 @@ if (we_are_not_logged_in()){
   exit;
 }
 require_once('POS_admin_header.php');
-do_html_heading("Delete User");
+do_html_heading("Delete Customer");
 
-include "user_sidebar.php";
+include "customer_sidebar.php";
 
 # Get the Users by user id (username)
 if (!isset($_POST['submit']))
 {
-  $username =$_GET['id'];
-  echo "record id is: $username</br>";
+  $customerid =$_GET['id'];
+  echo "record id is: $customerid</br>";
 try
   {
     //open the database and find product
@@ -25,14 +25,16 @@ try
 
     #get user to delete
 
-    $query = "SELECT * from user WHERE user.username = '$username'";
-
+    $query = "SELECT * from customers WHERE customers.customerid = '$customerid'";
+    #$result = $db->query($query)->fetch(PDO::FETCH_ASSOC);
     $result = $db->query($query);
     if (!$result) {
          die($result->error);
     }
-    $user = $result->fetch_assoc();
-    display_user_form($user['username'],$user['first'],$user['last'],$user['email']);
+    $customer = $result->fetch_assoc();
+    display_customer_delete_form($customer['customerid'], $customer['name'], $customer['address'],
+                                 $customer['city'], $customer['state'],
+                                 $customer['zip'], $customer['country']);
     }
     catch(PDOException $e)
     {

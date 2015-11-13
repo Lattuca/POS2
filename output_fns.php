@@ -159,8 +159,7 @@ function display_product_details($product) {
       }
     }
     echo "<td><ul>";
-    #echo "<li><strong>Product Description:</strong> ";
-    #echo $product['product_desc'];
+
     echo "</li><li><strong>Product UPC:</strong> ";
     echo $product['product_upc'];
     echo "</li><li><strong>Quantity:</strong> ";
@@ -185,7 +184,7 @@ function display_checkout_form() {
   <br />
   <table border="0" width="100%" cellspacing="0">
   <form action="purchase.php" method="post">
-  <tr><th colspan="2" bgcolor="#cccccc">Your Details</th></tr>
+  <tr><th colspan="2" bgcolor="#cccccc">Customer Details</th></tr>
   <tr>
     <td>Name</td>
     <td><input type="text" name="name" value="" maxlength="40" size="40"/></td>
@@ -208,34 +207,9 @@ function display_checkout_form() {
   </tr>
   <tr>
     <td>Country</td>
-    <td><input type="text" name="country" value="" maxlength="20" size="40"/></td>
+    <td><input type="text" name="country" value="USA" maxlength="20" size="40"/></td>
   </tr>
-  <!-- <tr><th colspan="2" bgcolor="#cccccc">Shipping Address (leave blank if as above)</th></tr>
-  <tr>
-    <td>Name</td>
-    <td><input type="text" name="ship_name" value="" maxlength="40" size="40"/></td>
-  </tr>
-  <tr>
-    <td>Address</td>
-    <td><input type="text" name="ship_address" value="" maxlength="40" size="40"/></td>
-  </tr>
-  <tr>
-    <td>City/Suburb</td>
-    <td><input type="text" name="ship_city" value="" maxlength="20" size="40"/></td>
-  </tr>
-  <tr>
-    <td>State/Province</td>
-    <td><input type="text" name="ship_state" value="" maxlength="20" size="40"/></td>
-  </tr>
-  <tr>
-    <td>Postal Code or Zip Code</td>
-    <td><input type="text" name="ship_zip" value="" maxlength="10" size="40"/></td>
-  </tr>
-  <tr>
-    <td>Country</td>
-    <td><input type="text" name="ship_country" value="" maxlength="20" size="40"/></td>
-  </tr>
-  <tr> -->
+
     <td colspan="2" align="center"><p><strong>Please press Purchase to confirm
          your purchase, or Continue Shopping to add or remove items.</strong></p>
      <?php display_form_button("purchase", "Purchase These Items"); ?>
@@ -356,8 +330,8 @@ function display_cart($cart, $change = true, $images = 1) {
       echo "</td>";
     }
     echo "<td align=\"left\">
-          <a href=\"show_product.php?product_upc=".$product_upc."\">".$product['product_desc']."</a>
-          by ".$product['product_desc']."</td>
+          <a href=\"show_product.php?product_upc=".$product_upc."\">".$product['product_upc']."</a>
+          - ".$product['product_desc']."</td>
           <td align=\"center\">\$".number_format($product['price'], 2)."</td>
           <td align=\"center\">";
 
@@ -456,14 +430,20 @@ function display_registration_form($mode) {
 function display_admin_menu() {
 ?>
 <br />
+<hr />
 <ul>
+<h4> Select Admin Menu Options </h4>
+
 <li><a href="index.php">Go to POS</a><br /></li><br />
+<li><a href="display_orders.php">Display orders</a><br /></li><br />
 <li><a href="manage_categories.php">Manage categories</a><br /></li><br />
+<li><a href="manage_customers.php">Manage customers</a><br /></li><br />
 <li><a href="manage_products.php">Manage product inventory</a><br /></li><br />
 <li><a href="manage_users.php">Manage user profiles</a><br /></li><br />
-<li><a href="display_orders.php">Display orders</a><br /></li><br />
 
-<br /><br /><br />
+
+<br /><br /><br /><hr />
+
 <?php display_button("logout.php", "log-out", "Log Out"); ?>
 
 
@@ -642,7 +622,7 @@ echo '<tr> <td colspan="2" align="center">
 
 function show_user_details($username){
   $now = date("F j, Y, g:i a");
-  echo "<strong> User:</strong> $username <strong> Date: </strong> $now </h4>";
+  echo "<br /> <strong> User:</strong> $username <strong> Date: </strong> $now </h4>";
 }
 function get_customer_name($customerid){
 
@@ -664,6 +644,80 @@ function get_customer_name($customerid){
   return $row->name;
   }
 
+function display_customer_update_form($customerid, $name, $address, $city, $state, $zip, $country){
+
+  ?>
+
+<form method="post" action="pos_cust_db_update.php">
+<table bgcolor="#cccccc">
+
+<tr><th colspan="2" bgcolor="#cccccc">Customer Details</th></tr>
+<tr>
+  <td>Name</td>
+  <td><input type="text" name="name" value=<?php print $name ?> maxlength="40" size="40"/></td>
+</tr>
+<tr>
+  <td>Address</td>
+  <td><input type="text" name="address" value=<?php print $address ?> maxlength="40" size="40"/></td>
+</tr>
+<tr>
+  <td>City/Suburb</td>
+  <td><input type="text" name="city" value=<?php print $city ?> maxlength="20" size="40"/></td>
+</tr>
+<tr>
+  <td>State</td>
+  <td><select name="state"> <?php echo StateDropdown($state, 'abbrev'); ?></select></td>
+</tr>
+<tr>
+  <td>Zip Code</td>
+  <td><input type="text" name="zip" value=<?php print $zip ?> maxlength="10" size="40"/></td>
+</tr>
+<tr>
+  <td>Country</td>
+  <td><input type="text" name="country" value=<?php print $country ?> maxlength="20" size="40"/></td>
+</tr>
+
+<tr>
+  <td colspan=2 align="center">
+  <input type="submit" value="Update"></td></tr>
+  <tr>
+    <td><input type ="hidden" name=customerid value="<?php echo "$customerid"; ?>"</td>
+  </tr>
+</table></form>
+<?php
+}
+
+function display_customer_delete_form($customerid, $name, $address, $city, $state, $zip, $country) {
+
+  // Display the data to confirm
+
+    echo "<table border=4  CELLSPACING=4 CELLPADDING=4>";
+    echo "<tr>";
+    echo '<td BGCOLOR="#C0C0C0", align="center">Customer Id</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">Name</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">Address</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">City</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">State</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">ZIP</td>';
+    echo '<td BGCOLOR="#C0C0C0", align="center">Country</td>';
 
 
+    echo "</tr>";
+
+    echo "<tr>";
+    echo '<td align="center"> '.$customerid.'</td>';
+    echo '<td align="left"> '.$name.'</td>';
+    echo '<td align="center">'.$address."</td>";
+    echo '<td align="right">'.$city."</td>";
+    echo '<td align="center">'.$state."</td>";
+    echo '<td align="center"> '.$zip.' </td>';
+    echo '<td align="center"> '.$country.' </td>';
+    echo "</tr>";
+    echo "</table>";
+
+
+    echo "<br/><br/><br/><br/><br/><br/>";
+
+    echo'<td class="style2"><a href="pos_cust_del_db.php?id='.$customerid.'"onclick="javascript:return confirm(\'Are you sure you want to delete this customer?\')">Confirm Delete</a>';"</td></tr>";
+}
 ?>
