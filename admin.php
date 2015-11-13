@@ -6,8 +6,7 @@ require_once('POS_admin_header.php');
 
 
 session_start();
- #$username = $_POST['username'];
- #echo "logging in...$username";
+ 
 
 
 if ($_SESSION['logged_in'] == 1){
