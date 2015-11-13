@@ -2,6 +2,11 @@
   include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
+  if (we_are_not_logged_in()){
+    display_button("POS_login.php","log-in","Log In");
+    exit;
+  }
+
   header("Cache-Control: max-age=300, must-revalidate");
   do_html_header('Checkout');
 
@@ -24,6 +29,7 @@
       session_destroy();
       session_start();
       $_SESSION['username'] = $username;
+      ($_SESSION['logged_in'] = 1;
       #echo "username is $username and session username is $_SESSION['username']";
 
       echo "<p>Thank you for shopping with us. Your order has been placed.</p>";

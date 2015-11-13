@@ -5,7 +5,7 @@ require_once('POS_fns.php');
 require_once('POS_admin_header.php');
 
 
-session_start();
+  session_start();
 
   if (isset($_POST['username'])) {
     $_SESSION['username'] = $_POST['username'];

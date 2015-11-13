@@ -2,7 +2,10 @@
   include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
-
+  if (we_are_not_logged_in()){
+    display_button("POS_login.php","log-in","Log In");
+    exit;
+  }
   $product_upc = $_GET['product_upc'];
 
   // get this product out of database
@@ -25,8 +28,8 @@
 
   display_button("show_cart.php?new=".$product_upc, "add-to-cart",
                    "Add".$product['product_desc']." To My Shopping Cart");
-  display_button($target, "continue-shopping", "Continue Shopping");
-
+  #display_button($target, "continue-shopping", "Continue Shopping");
+  display_button($target, "back", "Select Category");
 
   do_html_footer();
 ?>

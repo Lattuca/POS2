@@ -5,7 +5,10 @@
 
   // The shopping cart needs sessions, so start one
   session_start();
-
+  if (we_are_not_logged_in()){
+    display_button("POS_login.php","log-in","Log In");
+    exit;
+  }
   do_html_header("Checkout");
 
   if(($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {

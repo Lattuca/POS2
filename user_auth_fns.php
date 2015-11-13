@@ -158,5 +158,13 @@ function change_password($username, $old_password, $new_password) {
   }
 }
 
-
+// Check to see if we are logged in as an admin
+function we_are_not_logged_in()
+{
+  if (empty($_SESSION['logged_in'])) {
+    echo "Only logged in user can execute this function.<br/>";
+    do_html_footer();
+  	return true;
+	}
+}
 ?>

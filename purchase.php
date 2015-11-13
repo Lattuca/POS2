@@ -3,6 +3,10 @@
   include ('POS_fns.php');
   // The shopping cart needs sessions, so start one
   session_start();
+  if (we_are_not_logged_in()){
+    display_button("POS_login.php","log-in","Log In");
+    exit;
+  }
   header("Cache-Control: max-age=300, must-revalidate");
   do_html_header("Checkout");
 

@@ -4,7 +4,10 @@
 require_once('POS_fns.php');
 
 session_start();
-
+if (we_are_not_logged_in()){
+  display_button("POS_login.php","log-in","Log In");
+  exit;
+}
 do_html_header("Updating Product");
 require_once('product_sidebar.php');
 if (check_admin_user()) {

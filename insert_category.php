@@ -6,7 +6,10 @@ require_once('POS_admin_header.php');
 do_html_heading("Adding a category");
 require_once("admin_sidebar.php");
 session_start();
-
+if (we_are_not_logged_in()){
+  display_button("POS_login.php","log-in","Log In");
+  exit;
+}
 if (check_admin_user()) {
   if (filled_out($_POST))   {
     $catname = $_POST['catname'];

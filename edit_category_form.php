@@ -3,7 +3,10 @@
 // include function files for this application
 require_once('POS_fns.php');
 session_start();
-
+if (we_are_not_logged_in()){
+  display_button("POS_login.php","log-in","Log In");
+  exit;
+}
 do_html_header("Edit category");
 if (check_admin_user()) {
   if ($catname = get_category_name($_GET['catid'])) {
