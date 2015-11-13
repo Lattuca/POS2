@@ -82,15 +82,7 @@ function user_update($username, $password, $first, $last, $email) {
     throw new Exception('Could not execute query');
   }
 
-      // if ok, updatein db
-      /* $query = "update categories
-                set catname='".$catname."'
-                where catid='".$catid."'";
-      $result = @$conn->query($query); */
-
-
-
-  $query = "update user
+    $query = "update user
                 SET passwd = sha1('".$password."'),
                     first = '".$first."',
                     last = '".$last."',

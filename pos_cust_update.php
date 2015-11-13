@@ -18,7 +18,7 @@ require_once('state_drop_down.php');
 if (!isset($_POST['submit']))
 {
   $customerid =$_GET['id'];
-  echo "customer record id is: $customerid</br>";
+  #echo "customer record id is: $customerid</br>";
 try
   {
     //open the database and find product
@@ -32,7 +32,7 @@ try
     $result = $db->query($query);
     $customer = $result->fetch_assoc();
     $custname = $customer['name'];
-    echo "customer name  is $custname";
+    #echo "customer name  is $custname";
 
     display_customer_update_form($customer['customerid'], $customer['name'], $customer['address'],
                                  $customer['city'], $customer['state'],

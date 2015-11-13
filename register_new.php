@@ -74,12 +74,12 @@
     // provide link to members page
     if ($mode=="register"){
        do_html_header('Registration successful');
-       echo "Your registration was successful.  Go to the new user page! <br>";
+       echo "Your registration was successful.  Go to the new user page! <br><hr />";
        do_html_url('member.php', 'Go to Users Home Page');
      }else{
        #do_html_header('New user added successfully');
        require_once('user_sidebar.php');
-       echo "Your adding of new user was successful <br>";
+       echo "Your adding of new user was successful <br><hr />";
        #do_html_url('manage_users.php','Go to Manage Users Page');
      }
 

@@ -15,13 +15,13 @@ require_once("category_sidebar.php");
 $catid = $_GET['id'];
 if (isset($_GET['id'])) {
   if(delete_category($_GET['id'])) {
-    echo "<p>Category was deleted.</p>";
+    echo "<p>Category was deleted.</p><hr />";
     } else {
       echo "<p>Category could not be deleted.<br />
-            This is usually because it is not empty.</p>";
+            This is usually because it is not empty.</p><hr />";
     }
  } else {
-    echo "<p>No category specified.  Please try again.</p>";
+    echo "<p>No category specified.  Please try again.</p><hr />";
   }
 do_html_footer();
 

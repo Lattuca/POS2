@@ -25,7 +25,7 @@ if (!isset($_POST['submit']))
     $db = db_connect();
 
     $query = "DELETE FROM user WHERE user.username = '$username'";
-    echo "delete query $query <br>";
+  
     $result = $db->query($query);
     if (!$result) {
       throw new Exception('Could not delete you in database - please try again later.');

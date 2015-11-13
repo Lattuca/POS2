@@ -36,10 +36,10 @@ if (check_admin_user()) {
     $errors = validate_product($oldproduct_upc, $product_upc, $product_desc, $quantity, $price, $cost);
     if (empty($errors)) {
       if(insert_product($product_upc, $product_desc, $quantity, $price, $cost, $catid, $available, $product_notes)) {
-        echo "<p>product <em>".stripslashes($product_upc)."</em> was added to the database.</p>";
-        do_html_URL("manage_products.php", "Product list");
+        echo "<p>product <em>".stripslashes($product_upc)."</em> was added to the database.</p><hr />";
+        #do_html_URL("manage_products.php", "Product list");
       } else {
-        echo "<p>product <em>".stripslashes($product_upc)."</em> could not be added to the database.</p>";
+        echo "<p>product <em>".stripslashes($product_upc)."</em> could not be added to the database.</p><hr />";
      }
    }else{
      echo "Errors found in product entry:<br/>";

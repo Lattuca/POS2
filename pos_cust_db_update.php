@@ -8,8 +8,11 @@
     exit;
   }
   header("Cache-Control: max-age=300, must-revalidate");
+  require_once('POS_admin_header.php');
   do_html_heading("Customer Update");
   require_once('POS_admin_header.php');
+  include "customer_sidebar.php";
+
 
 
   // create short variable names
@@ -37,9 +40,11 @@
               zip = '".$zip."',
               country = '".$country."' WHERE customerid = '".$customer_id."'";
 
-    echo "customer update query is $query";
+      $result = $conn->query($query);
+      if (!$result) {
+        throw new Exception('Could not update you in database - please try again later.');
+      }
 
-    #$result = $conn->query($query);
 
 
   } else {

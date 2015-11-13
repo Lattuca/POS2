@@ -13,11 +13,10 @@ do_html_heading("Delete Customer");
 
 include "customer_sidebar.php";
 
-# Get the Users by user id (username)
 if (!isset($_POST['submit']))
 {
   $customerid =$_GET['id'];
-  echo "record id is: $customerid</br>";
+
 try
   {
     //open the database and find product
