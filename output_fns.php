@@ -457,11 +457,11 @@ function display_admin_menu() {
 ?>
 <br />
 <ul>
-<li><a href="index.php">Go to POS</a><br /></li>
-<li><a href="insert_category_form.php">Add a new category</a><br /></li>
-<li><a href="manage_products.php">Manage product inventory</a><br /></li>
-<li><a href="manage_users.php">Manage user profiles</a><br /></li>
-<li><a href="display_orders.php">Display orders</a><br /></li>
+<li><a href="index.php">Go to POS</a><br /></li><br />
+<li><a href="manage_categories.php">Manage categories</a><br /></li><br />
+<li><a href="manage_products.php">Manage product inventory</a><br /></li><br />
+<li><a href="manage_users.php">Manage user profiles</a><br /></li><br />
+<li><a href="display_orders.php">Display orders</a><br /></li><br />
 
 <br /><br /><br />
 <?php display_button("logout.php", "log-out", "Log Out"); ?>

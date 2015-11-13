@@ -10,7 +10,6 @@ if (we_are_not_logged_in()){
   exit;
 }
 
-#do_html_header("Edit product details");
 require_once('POS_admin_header.php');
 do_html_heading("Edit Product");
 

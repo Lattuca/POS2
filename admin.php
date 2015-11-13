@@ -12,7 +12,6 @@ require_once('POS_admin_header.php');
   }
   show_user_details($_SESSION['username']);
 
-  #echo "<h3> User: $username;
 
  if ($_SESSION['logged_in'] == 1){
   display_admin_menu();
@@ -32,7 +31,7 @@ require_once('POS_admin_header.php');
    } else {
       // unsuccessful login
       echo "<p>Invalid username or password entered.<br/></p>";
-      #do_html_url('POS_login.php', 'Login');
+
       show_login_button();
       do_html_footer();
       exit;
@@ -41,7 +40,7 @@ require_once('POS_admin_header.php');
   # Blank username or password entered
     echo "<p>You must enter a username and password to login.<br/></p>";
     show_login_button();
-    #do_html_url('POS_login.php', 'Login');
+  
     do_html_footer();
  }
 }

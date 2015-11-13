@@ -36,14 +36,14 @@ function display_category_form($category = '') {
        value="<?php echo $edit ? 'Update' : 'Add'; ?> Category" /></form>
      </td>
      <?php
-        if ($edit) {
+        /* if ($edit) {
           //allow deletion of existing categories
           echo "<td>
                 <form method=\"post\" action=\"delete_category.php\">
                 <input type=\"hidden\" name=\"catid\" value=\"".$category['catid']."\" />
                 <input type=\"submit\" value=\"Delete category\" />
                 </form></td>";
-       }
+       }*/
      ?>
   </tr>
   </table>
@@ -194,6 +194,7 @@ function insert_category($catname) {
              where catname='".$catname."'";
    $result = $conn->query($query);
    if ((!$result) || ($result->num_rows!=0)) {
+     echo "Category already exists.";
      return false;
    }
 
