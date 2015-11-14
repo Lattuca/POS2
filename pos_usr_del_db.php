@@ -3,8 +3,7 @@ require_once('POS_fns.php');
 require_once('output_fns.php');
 session_start();
 if (we_are_not_logged_in()){
-  display_button("POS_login.php","log-in","Log In");
-  exit;
+    exit;
 }
 
 require_once('POS_admin_header.php');
@@ -25,7 +24,7 @@ if (!isset($_POST['submit']))
     $db = db_connect();
 
     $query = "DELETE FROM user WHERE user.username = '$username'";
-  
+
     $result = $db->query($query);
     if (!$result) {
       throw new Exception('Could not delete you in database - please try again later.');

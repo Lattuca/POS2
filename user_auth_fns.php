@@ -154,7 +154,8 @@ function change_password($username, $old_password, $new_password) {
 function we_are_not_logged_in()
 {
   if (empty($_SESSION['logged_in'])) {
-    echo "Only logged in user can execute this function.<br/>";
+    echo "<p> Only logged in user can execute this function.</p>";
+    show_login_button();
     do_html_footer();
   	return true;
 	}

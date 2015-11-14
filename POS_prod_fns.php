@@ -192,13 +192,15 @@ try {
   # get current product quantity for update
 
   $conn = db_connect();
-  $query = "select * from products where product_upc = $product_upc";
+  $query = "select * from products where product_upc = '".$product_upc."'";
+  #echo "quantity query is...$query<br />";
   $result = @$conn->query($query);
   if (!$result) {
     echo "error in fetching $product_upc <br />";
     return false;
   }
   $num_prods = @$result->num_rows;
+  #echo "number of products found....".$num_prods."<br />";
   if ($num_prods == 0) {
      return false;
   }
@@ -210,8 +212,8 @@ try {
 
   # now we update the database with the new quantity
 
-  $query = "update products set quantity = '".$product_qty."' where product_upc = $product_upc";
-  #echo "update qty query is $query";
+  $query = "update products set quantity = '".$product_qty."' where product_upc = '".$product_upc."'";
+  #echo "update qty query is $query ....<br />";
   # update product table
   $result = @$conn->query($query);
   if (!$result) {

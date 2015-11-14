@@ -4,7 +4,6 @@
 require_once('POS_fns.php');
 session_start();
 if (we_are_not_logged_in()){
-  display_button("POS_login.php","log-in","Log In");
   exit;
 }
 $old_user = isset($_SESSION['admin_user']) ? $_SESSION['admin_user'] : NULL;
@@ -26,7 +25,6 @@ if (!empty($old_user)) {
 } else {
   // if they weren't logged in but came to this page somehow
   echo "<p>You are not logged in.</p>";
-  #do_html_url("POS_login.php", "Login");
   show_login_button();
 
 

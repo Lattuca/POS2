@@ -5,7 +5,6 @@ require_once('POS_fns.php');
 require_once('output_fns.php');
 session_start();
 if (we_are_not_logged_in()){
-  display_button("POS_login.php","log-in","Log In");
   exit;
 }
 require_once('POS_admin_header.php');
@@ -32,6 +31,7 @@ try
     $result = $db->query($query);
     $customer = $result->fetch_assoc();
     $custname = $customer['name'];
+
     #echo "customer name  is $custname";
 
     display_customer_update_form($customer['customerid'], $customer['name'], $customer['address'],

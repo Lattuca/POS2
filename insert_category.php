@@ -7,7 +7,6 @@ do_html_heading("Adding a category");
 require_once("category_sidebar.php");
 session_start();
 if (we_are_not_logged_in()){
-  display_button("POS_login.php","log-in","Log In");
   exit;
 }
 if (check_admin_user()) {

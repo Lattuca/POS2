@@ -5,7 +5,6 @@ require_once('POS_fns.php');
 
 session_start();
 if (we_are_not_logged_in()){
-  display_button("POS_login.php","log-in","Log In");
   exit;
 }
 require_once('POS_admin_header.php');

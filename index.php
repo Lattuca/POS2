@@ -4,8 +4,7 @@
   session_start();
 
   if (we_are_not_logged_in()){
-    display_button("POS_login.php","log-in","Log In");
-    exit;
+      exit;
   }
 
   do_html_header("Welcome Carmelo's POS");

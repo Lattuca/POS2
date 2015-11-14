@@ -506,21 +506,21 @@ function display_user_update_form($username, $first, $last, $email, $password  )
  <table bgcolor="#cccccc">
    <tr>
      <td>Email address:</td>
-     <td><input type="text" name="email" value = <?php print "$email";?> size="30"/></td>
+     <td><input type="text" name="email" value = "<?php print $email;?>" size="30"/></td>
    </tr>
    <tr>
      <td>Preferred username <br />(max 16 chars):</td>
-     <td valign="top"><input type="text" readonly name="username" value=<?php print "$username";?>
+     <td valign="top"><input type="text" readonly name="username" value="<?php print $username;?>"
          size="16" maxlength="16"/</td>
   </tr>
    <tr>
      <tr>
        <td>First name:</td>
-       <td valign="top"><input type="text" name="first" value=<?php print "$first"; ?> </td></tr>
+       <td valign="top"><input type="text" name="first" value="<?php print $first; ?>" </td></tr>
      <tr>
     <tr>
         <td>Last name:</td>
-        <td valign="top"><input type="text" name="last" value=<?php print "$last"; ?> ></td></tr>
+        <td valign="top"><input type="text" name="last" value="<?php print $last; ?>"</td></tr>
     <tr>
      <td>Password <br />(between 6 and 16 chars):</td>
      <td valign="top"><input type="password" name="passwd"
@@ -646,6 +646,7 @@ function get_customer_name($customerid){
 
 function display_customer_update_form($customerid, $name, $address, $city, $state, $zip, $country){
 
+
   ?>
 
 <form method="post" action="pos_cust_db_update.php">
@@ -654,15 +655,15 @@ function display_customer_update_form($customerid, $name, $address, $city, $stat
 <tr><th colspan="2" bgcolor="#cccccc">Customer Details</th></tr>
 <tr>
   <td>Name</td>
-  <td><input type="text" name="name" value=<?php print $name ?> maxlength="40" size="40"/></td>
+  <td><input type="text" name="name" value="<?php print $name; ?>" maxlength="40" size="40"/></td>
 </tr>
 <tr>
   <td>Address</td>
-  <td><input type="text" name="address" value=<?php print $address ?> maxlength="40" size="40"/></td>
+  <td><input type="text" name="address" value="<?php print $address; ?>" maxlength="40" size="40"/></td>
 </tr>
 <tr>
   <td>City/Suburb</td>
-  <td><input type="text" name="city" value=<?php print $city ?> maxlength="20" size="40"/></td>
+  <td><input type="text" name="city" value="<?php print $city; ?>" maxlength="20" size="40"/></td>
 </tr>
 <tr>
   <td>State</td>
@@ -670,11 +671,11 @@ function display_customer_update_form($customerid, $name, $address, $city, $stat
 </tr>
 <tr>
   <td>Zip Code</td>
-  <td><input type="text" name="zip" value=<?php print $zip ?> maxlength="10" size="40"/></td>
+  <td><input type="text" name="zip" value="<?php print $zip; ?>" maxlength="10" size="40"/></td>
 </tr>
 <tr>
   <td>Country</td>
-  <td><input type="text" name="country" value=<?php print $country ?> maxlength="20" size="40"/></td>
+  <td><input type="text" name="country" value="<?php print $country; ?>" maxlength="20" size="40"/></td>
 </tr>
 
 <tr>
