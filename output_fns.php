@@ -135,7 +135,7 @@ function display_products($product_array) {
         echo "&nbsp;";
       }
       echo "</td><td>";
-      $title = $row['product_upc']." description ".$row['product_desc'];
+      $title = $row['product_upc']." - ".$row['product_desc'];
       do_html_url($url, $title);
       echo "</td></tr>";
     }

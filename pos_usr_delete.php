@@ -17,7 +17,7 @@ include "user_sidebar.php";
 if (!isset($_POST['submit']))
 {
   $username =$_GET['id'];
-  echo "record id is: $username</br>";
+  #echo "record id is: $username</br>";
 try
   {
     //open the database and find product

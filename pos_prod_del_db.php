@@ -18,7 +18,7 @@ require_once('product_sidebar.php');
 if (!isset($_POST['submit']))
 {
   $product_upc =$_GET['id'];
-  echo "record id: $product_upc <br />";
+  #echo "record id: $product_upc <br />";
 
 
   try

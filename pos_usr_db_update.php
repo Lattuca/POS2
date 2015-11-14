@@ -21,7 +21,7 @@ $passwd2 = $_POST['passwd2'];
 
 // start session which may be needed later
 // start it now because it must go before headers
-session_start();
+
 try   {
   // check forms filled in
   #if (!filled_out($_POST)) {
@@ -69,9 +69,9 @@ try   {
   $_SESSION['valid_user'] = $username;
 
   // provide link to members page
-  #do_html_header('Update successful');
-  echo "Your update was successful.<br>";
-  #do_html_url('manage_users.php', 'Go to Manage Users page');
+    
+  echo "Your update was successful.<br><hr />";
+
 
 
  // end page

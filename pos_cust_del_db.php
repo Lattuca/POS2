@@ -25,7 +25,7 @@ if (!isset($_POST['submit']))
     $db = db_connect();
 
     $query = "DELETE FROM customers WHERE customers.customerid = '$customerid'";
-    echo "delete query $query <br>";
+    #echo "delete query $query <br>";
     $result = $db->query($query);
     if (!$result) {
       throw new Exception('Could not delete you in database - please try again later.');

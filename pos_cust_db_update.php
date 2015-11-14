@@ -44,8 +44,7 @@
       if (!$result) {
         throw new Exception('Could not update you in database - please try again later.');
       }
-
-
+      echo "<p>Customer $name has been updated.</p><hr />";
 
   } else {
     #echo "<p>You did not fill in all the fields, please try again.</p><hr />";

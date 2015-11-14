@@ -9,7 +9,7 @@ if (we_are_not_logged_in()){
   exit;
 }
 require_once('POS_admin_header.php');
-do_html_heading("Order List");
+do_html_heading("List of Sale Orders");
 include('admin_sidebar.php');
 
 try {

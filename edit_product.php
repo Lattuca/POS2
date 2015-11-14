@@ -8,7 +8,8 @@ if (we_are_not_logged_in()){
   display_button("POS_login.php","log-in","Log In");
   exit;
 }
-do_html_header("Updating Product");
+require_once('POS_admin_header.php');
+do_html_heading("Updating Product");
 require_once('product_sidebar.php');
 if (check_admin_user()) {
     $oldproduct_upc = $_POST['oldproduct_upc'];
@@ -31,12 +32,12 @@ if (check_admin_user()) {
     $errors = validate_product($oldproduct_upc, $product_upc, $product_desc, $quantity, $price, $cost);
     if (empty($errors)) {
       if(update_product($oldproduct_upc, $product_upc, $product_desc, $quantity, $price, $cost, $catid, $available, $product_notes)) {
-        echo "<p>Product was updated.</p>";
+        echo "<p>Product was updated.</p><hr />";
       } else {
-        echo "<p>Product could not be updated.</p>";
+        echo "<p>Product could not be updated.</p><hr />";
       }
     }else{
-      echo "Errors found in product entry:<br/>";
+      echo "<strong>Errors found in product entry:</strong><br/><hr />";
       echo "Product UPC: $product_upc<br/>";
       echo "Product Description: $product_desc<br/>";
       echo "Quantity: $quantity<br/>";

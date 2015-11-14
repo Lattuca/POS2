@@ -21,12 +21,6 @@
   $mode =$_POST['mode'];
 
 
-  #echo "Mode is $mode";
-
-  // start session which may be needed later
-  // start it now because it must go before headers
-  session_start();
-  try   {
     // check forms filled in
     #if (!filled_out($_POST)) {
     #    try_again ('You have not filled the form out correctly - please go back and try again.');
@@ -79,17 +73,11 @@
      }else{
        #do_html_header('New user added successfully');
        require_once('user_sidebar.php');
-       echo "Your adding of new user was successful <br><hr />";
+       echo "Your adding of new user was successful. <br><hr />";
        #do_html_url('manage_users.php','Go to Manage Users Page');
      }
 
    // end page
    do_html_footer();
-  }
-  catch (PDOException $e) {
-     do_html_header('Problem:');
-     echo $e->getMessage();
-     do_html_footer();
-     exit;
-  }
+
 ?>

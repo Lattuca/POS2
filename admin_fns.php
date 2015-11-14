@@ -144,17 +144,6 @@ function display_product_form($product = '') {
         <input type="submit"
                value="<?php echo $edit ? 'Update' : 'Add'; ?> product" />
         </form></td>
-        <?php
-           if ($edit) {
-             echo "<td>
-                   <form method=\"post\" action=\"delete_product.php\">
-                   <input type=\"hidden\" name=\"product_upc\"
-                    value=\"".$product['product_upc']."\" />
-                   <input type=\"submit\" value=\"Delete product\"/>
-                   </form></td>";
-            }
-          ?>
-         </td>
       </tr>
   </table>
   </form>
