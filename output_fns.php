@@ -22,8 +22,8 @@ function do_html_header($title = '') {
 
     <style>
       h2 { font-family: Arial, Helvetica, sans-serif; font-size: 22px; color: red; margin: 6px }
-      body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      li, td { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
+      body { font-family: Arial, Helvetica, sans-serif; font-size: 16px }
+      li, td { font-family: Arial, Helvetica, sans-serif; font-size: 16px }
       hr { color: #FF0000; width=70%; text-align=center}
       a { color: #000000 }
     </style>
@@ -136,8 +136,9 @@ function display_products($product_array) {
       }
       echo "</td><td>";
       $title = $row['product_upc']." - ".$row['product_desc'];
+      echo "<li>";
       do_html_url($url, $title);
-      echo "</td></tr>";
+      echo "</li></td></tr>";
     }
 
     echo "</table>";
@@ -198,11 +199,11 @@ function display_checkout_form() {
     <td><input type="text" name="city" value="" maxlength="20" size="40"/></td>
   </tr>
   <tr>
-    <td>State</td>
+    <td>State/Prov</td>
     <td><select name="state"> <?php echo StateDropdown('CA', 'abbrev'); ?></select></td>
   </tr>
   <tr>
-    <td>Zip Code</td>
+    <td>Zip/Postal Code</td>
     <td><input type="text" name="zip" value="" maxlength="10" size="40"/></td>
   </tr>
   <tr>

@@ -11,13 +11,28 @@
 
   $card_type = $_POST['card_type'];
   $card_number = $_POST['card_number'];
+  $amex_code =$_POST['amex_code'];
   $card_month = $_POST['card_month'];
   $card_year = $_POST['card_year'];
   $card_name = $_POST['card_name'];
 
+  // check if credit card is numeric
+
+  if (!is_numeric($card_number) && $card_number<>"") {
+    try_again("<p> Credit Card number is not numeric, please try again</p><hr />");
+  }
+
+  if($card_type =="American Express" && !is_numeric($amex_code)){
+    try_again("<p> Amex code number is not numeric, please try again</p><hr />");
+  }
+
+
   if(($_SESSION['cart']) && ($card_type) && ($card_number) &&
      ($card_month) && ($card_year) && ($card_name)) {
+
+
     //display cart, not allowing changes and without pictures
+
     display_cart($_SESSION['cart'], false, 0);
 
     display_shipping(calculate_shipping_cost());
@@ -30,7 +45,7 @@
       $_SESSION['username'] = $username;
       $_SESSION['logged_in'] = 1;
 
-      echo "<p>Thank you for shopping with us. Your order has been placed.</p><hr />";
+      echo "<p>Order has been completed.</p><hr />";
       display_button("index.php", "continue-shopping", "Continue Shopping");
     } else {
       echo "<p>Could not process your card. Please contact the card issuer or try again.</p><hr />";
